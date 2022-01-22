@@ -1,0 +1,16 @@
+SPRITE RENDERER
+  COLOR - Set the collectable to the color you want
+  SORTING LAYER - Dropables
+
+RIGIDBODY 2D
+  BODY TYPE - Kinematic
+  CONSTRAINTS - Freeze X and Z
+
+COLLECTABLE BEHAVIOUR (SCRIPT)
+  Should be fine as is
+
+BOX COLLIDER 2D
+  IS TRIGGER - true
+
+  
+

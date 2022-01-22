@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Fire
+  - Twin
+  - Ground
+  - Enemy
+  - SpaceshipPart1
+  - SpaceshipPart2
+  - SpaceshipPart3
+  - Dropzone
+  - Part1PickupPoint
+  - Part2PickupPoint
+  - GM
+  - CeilingTrigger
+  - LV
+  - LiftOffEntrance
+  - Collectable
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - Ground
+  - Player
+  - Enemy
+  - FuelAndGems
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Rocket
+    uniqueID: 3808540189
+    locked: 0
+  - name: Player
+    uniqueID: 2299809077
+    locked: 0
+  - name: Dropables
+    uniqueID: 1841922209
+    locked: 0
+  - name: Enemy
+    uniqueID: 1177919207
+    locked: 0
+  - name: Ground
+    uniqueID: 3740907919
+    locked: 0
