@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class SpaceshipPartsBehaviour : MonoBehaviour
 {
-	public enum ObjectState { FALLING, WAITING, IN_TRANSIT, DROPPING, DOCKED };
+	public enum ObjectState
+	{
+		WAITING,            //	part is resting on the ground waiting to be picked up
+		IN_TRANSIT,         //	part has been picked up and the player has it
+		DROPPING,           //	the player has past the drop zone and the part is dropping onto the spaceship
+		DOCKED,             //	the part has now docked woth the rest of the spaceship
+		PLAYER_DIED         //	the player has died and the part is falling to the ground
+	};
+
 	public ObjectState state;
 	private Rigidbody2D rb;
 	public float speed = 2.0f;
@@ -23,8 +31,8 @@ public class SpaceshipPartsBehaviour : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		//  if the object is falling from the sky OR has been dropped in the drop zone then apply a small downward force to it
-		if (state == ObjectState.FALLING)
+		//  if the player has died OR has been dropped in the drop zone then apply a small downward force to it
+		if (state == ObjectState.PLAYER_DIED)
 			rb.MovePosition(new Vector2(transform.position.x, transform.position.y - speed * Time.deltaTime));
 		else if (state == ObjectState.DROPPING)
 		{
@@ -37,9 +45,9 @@ public class SpaceshipPartsBehaviour : MonoBehaviour
 		//  the player has been killed and we've been re-attached to the Spaceship so can fall to the ground
 		if (state == ObjectState.IN_TRANSIT && gameObject.transform.parent.transform.tag != "Player")
 		{
-			Debug.Log(gameObject.name + " in transit but NOT attached to player so start falling");
+			// Debug.Log(gameObject.name + " in transit but NOT attached to player so start falling");
 			rb.MovePosition(new Vector2(transform.position.x, transform.position.y + 0.05f));
-			state = ObjectState.FALLING;
+			state = ObjectState.PLAYER_DIED;
 		}
 
 	}
@@ -60,7 +68,7 @@ public class SpaceshipPartsBehaviour : MonoBehaviour
 		//  if the player has bumped into the part when it was either in the air or on the ground
 		//  than attached the part to the player so it is no in transit and will go whereever
 		//  the player goes.
-		if (collider.tag == "Player" && (state == ObjectState.WAITING || state == ObjectState.FALLING))
+		if (collider.tag == "Player" && state == ObjectState.WAITING)
 		{
 			//   Debug.Log("Player collided with " + gameObject.tag);
 
