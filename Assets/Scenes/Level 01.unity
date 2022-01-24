@@ -511,6 +511,7 @@ MonoBehaviour:
   collectables:
   - {fileID: 8796990939630700307, guid: 6a799b1847f14214b86991cd6989a89c, type: 3}
   - {fileID: 8796990939630700307, guid: a3d083f038d3b6249a45ff087ab66260, type: 3}
+  enemyWaveSpawnerScript: {fileID: 142998743}
   spaceship: {fileID: 1628440953}
   liftOffEntrance: {fileID: 1217306578}
   spaceman: {fileID: 6653872574959122643, guid: c8a340a89dafc0e419e3de4df72ea01f, type: 3}
@@ -907,7 +908,7 @@ Transform:
   - {fileID: 1180234380}
   - {fileID: 936575938}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &247310449
 GameObject:
@@ -6626,7 +6627,7 @@ Transform:
   - {fileID: 2146736}
   - {fileID: 15654157}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1821588433
 GameObject:
@@ -8013,6 +8014,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 458768934120340525, guid: c8a340a89dafc0e419e3de4df72ea01f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1496636763710226365, guid: c8a340a89dafc0e419e3de4df72ea01f, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -8057,9 +8062,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1508961280205509195, guid: c8a340a89dafc0e419e3de4df72ea01f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2572000082511038637, guid: c8a340a89dafc0e419e3de4df72ea01f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995583570020867386, guid: c8a340a89dafc0e419e3de4df72ea01f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5780394764283602047, guid: c8a340a89dafc0e419e3de4df72ea01f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6653872574959122643, guid: c8a340a89dafc0e419e3de4df72ea01f, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6653872574959122643, guid: c8a340a89dafc0e419e3de4df72ea01f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7390742839503469748, guid: c8a340a89dafc0e419e3de4df72ea01f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7839075932497839173, guid: c8a340a89dafc0e419e3de4df72ea01f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8a340a89dafc0e419e3de4df72ea01f, type: 3}

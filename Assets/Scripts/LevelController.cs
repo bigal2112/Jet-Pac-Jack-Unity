@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class LevelController : MonoBehaviour
 {
 
-	public static LevelController Instance;
+	public static LevelController lvInstance;
 
 	//  internal spaceshipBuilt parameter and externally accessible getter
 	private static bool _spaceshipBuilt = false;
@@ -44,6 +44,7 @@ public class LevelController : MonoBehaviour
 	public Transform[] spaceshipParts;
 	public Transform spaceshipTopPart;
 	public Transform[] collectables;
+	public EnemyWaveSpawner enemyWaveSpawnerScript;
 
 	public Transform spaceship;
 	public GameObject liftOffEntrance;
@@ -65,25 +66,15 @@ public class LevelController : MonoBehaviour
 	private bool readyForNextLevel = false;
 	private bool newLoopStarted;
 
+	public int enemyWaveFrom;
+	public int enemyWaveTo;
+
 
 	private void Awake()
 	{
-		//  all this ensure the same AudioManager instance is present for all the components
-		//  this will mean any clips play will not end when the scene is changed.
-
-		//  if there is an instance of the audio manager
-		if (Instance != null)
-		{
-			//  and the instance is not this instance (the first instance) then destory it
-			if (Instance != this)
-				Destroy(this.gameObject);
-		}
-		else
-		//  if there is no instance then create one and set to the not be destroyed between scenes
-		{
-			Instance = this;
-			DontDestroyOnLoad(this);
-		}
+		//  if there is an instance of the LevelController
+		if (lvInstance == null)
+			lvInstance = this;
 	}
 
 
@@ -110,6 +101,9 @@ public class LevelController : MonoBehaviour
 		fuelCellsNeeded = 6;
 		fuelCellsDropped = 0;
 
+		//	set the enemy waves allowed for this level loop.
+		enemyWaveFrom = 0;
+		enemyWaveTo = 1;
 
 		collectablesCounter = 0;
 		spawningCollectable = false;
@@ -151,7 +145,7 @@ public class LevelController : MonoBehaviour
 		//  if the spaceman is inside the rocket then we can launch
 		if (_spacesmanInside && !rocketLaunched)
 		{
-			Debug.Log("StartCoroutine(RocketLaunch());");
+			// Debug.Log("StartCoroutine(RocketLaunch());");
 			StartCoroutine(RocketLaunch());
 		}
 
@@ -171,6 +165,7 @@ public class LevelController : MonoBehaviour
 			rocketLaunched = false;
 			_spacesmanInside = false;
 			rocketReadyForTakeOff = false;
+			liftOffEntrance.SetActive(false);
 
 			if (currentLevelLoop == 1)
 			{
@@ -179,6 +174,8 @@ public class LevelController : MonoBehaviour
 			}
 			else
 			{
+
+				//	and clean up any leftover gems
 				CleanupLeftoverCollectables();
 
 				//  run spaceship landing animation
@@ -189,7 +186,7 @@ public class LevelController : MonoBehaviour
 					sr.color = Color.white;
 				}
 
-				//  now land the spaceship
+				//  now play the landing spaceship animation
 				spaceshipAnim.SetBool("LaunchSpaceship", false);
 				spaceshipAnim.SetBool("LandSpaceship", true);
 
@@ -219,7 +216,7 @@ public class LevelController : MonoBehaviour
 	//
 	public static void FuelCellLanded()
 	{
-		Instance._fuelCellLanded();
+		lvInstance._fuelCellLanded();
 	}
 
 	//  actual method that controls what happens once a fuel cell has landed.
@@ -238,7 +235,7 @@ public class LevelController : MonoBehaviour
 
 	public static void DecrementCollectablesCounter()
 	{
-		Instance.collectablesCounter--;
+		lvInstance.collectablesCounter--;
 	}
 
 	//  D  r  o  p  F  u  e  l  C  e  l  l
@@ -313,6 +310,9 @@ public class LevelController : MonoBehaviour
 	{
 		rocketLaunched = true;
 
+		//	stop any more enemies spawning
+		enemyWaveSpawnerScript.enabled = false;
+
 		//  launch the spaceship
 		spaceshipAnim.SetBool("LandSpaceship", false);
 		spaceshipAnim.SetBool("LaunchSpaceship", true);
@@ -324,6 +324,24 @@ public class LevelController : MonoBehaviour
 
 
 
+	}
+
+	private void SetEnemiesForNextLoop()
+	{
+		switch (currentLevelLoop)
+		{
+			case 2:
+				enemyWaveFrom = 2;
+				enemyWaveTo = 2;
+				break;
+			case 3:
+				enemyWaveFrom = 3;
+				enemyWaveTo = 3;
+				break;
+			default:
+				Debug.LogError("No currentLevelLoop value present");
+				break;
+		}
 	}
 
 
@@ -355,6 +373,11 @@ public class LevelController : MonoBehaviour
 		//  TODO: only spawn the player if there are no enemies nearby. Try using raycast to see what's happening around you.
 		//  SPAWN THE PLAYER AS HE'S BEEN DESTROYED AT THE END OF THE PREVIOUS LOOP
 		Instantiate(spaceman, playerSpawnPoint.transform.position, Quaternion.identity);
+
+		SetEnemiesForNextLoop();
+
+		//	the only time this routine gets called is when a new sublevel is started so we can safely start the enemy spawner in here.
+		enemyWaveSpawnerScript.enabled = true;
 
 	}
 

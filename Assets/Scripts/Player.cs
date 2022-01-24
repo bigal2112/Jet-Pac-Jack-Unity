@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
 	private bool playerIsDying;
 
 	private LevelController levelController;
+	private GameMaster gameMaster;
 
 
 	private void Awake()
@@ -50,10 +51,16 @@ public class Player : MonoBehaviour
 	void Start()
 	{
 
-		levelController = LevelController.Instance;
+		gameMaster = GameMaster.gmInstance;
+		if (gameMaster == null)
+		{
+			Debug.LogError("No GameMaster found");
+		}
+
+		levelController = LevelController.lvInstance;
 		if (levelController == null)
 		{
-			Debug.LogError("No levelController found");
+			Debug.LogError("No LevelController found");
 		}
 
 		//  set our variables
@@ -233,6 +240,7 @@ public class Player : MonoBehaviour
 					{
 						Debug.Log("Decoupling " + child.tag + " from player to " + levelController.spaceship.name);
 						child.parent = levelController.spaceship.transform;
+
 					}
 
 					if (child.tag == "Collectable")
@@ -282,10 +290,10 @@ public class Player : MonoBehaviour
 		bc2D.isTrigger = false;
 	}
 
-	private void OnDestroy()
-	{
-		Debug.Log("Player OnDestroy");
-	}
+	// private void OnDestroy()
+	// {
+	// 	Debug.Log("Player OnDestroy");
+	// }
 
 }
 

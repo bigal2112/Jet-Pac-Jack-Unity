@@ -6,7 +6,7 @@ using TMPro;
 public class GameMaster : MonoBehaviour
 {
 
-	public static GameMaster gm;
+	public static GameMaster gmInstance;
 
 	//  internal remaining lives parameter and externally accessible getter
 	private static int _remainingLives = 3;
@@ -34,9 +34,23 @@ public class GameMaster : MonoBehaviour
 
 	private void Awake()
 	{
-		//    make sure we have a GameMaster object in the scene
-		if (gm == null)
-			gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
+		//	---------------------------------------------------------------------------------------
+		//	Create a Singleton of the GameMaster class that will not be destroyed between scenes.
+		//	---------------------------------------------------------------------------------------
+
+		//  if there is an instance of the GameMaster
+		if (gmInstance != null)
+		{
+			//  and the instance is not this instance (the first instance) then destory it
+			if (gmInstance != this)
+				Destroy(this.gameObject);
+		}
+		else
+		//  if there is no instance then create one and set to the not be destroyed between scenes
+		{
+			gmInstance = this;
+			DontDestroyOnLoad(this);
+		}
 	}
 
 
@@ -48,7 +62,7 @@ public class GameMaster : MonoBehaviour
 	//
 	public static void IncrementPlayer1Score(int amount)
 	{
-		gm._incrementPlayer1Score(amount);
+		gmInstance._incrementPlayer1Score(amount);
 	}
 
 	//  internal method that actually adds the amount to player 1's score
@@ -62,7 +76,7 @@ public class GameMaster : MonoBehaviour
 
 	public static void DecrementPlayersLives()
 	{
-		gm._decrementPlayersLives();
+		gmInstance._decrementPlayersLives();
 	}
 
 	private void _decrementPlayersLives()

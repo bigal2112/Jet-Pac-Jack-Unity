@@ -123,8 +123,8 @@ public class SpaceshipPartsBehaviour : MonoBehaviour
 
 	}
 
-	private void OnDestroy()
-	{
-		Debug.Log(gameObject.name + " - DESTROYED");
-	}
+	// private void OnDestroy()
+	// {
+	// 	Debug.Log(gameObject.name + " - DESTROYED");
+	// }
 }
