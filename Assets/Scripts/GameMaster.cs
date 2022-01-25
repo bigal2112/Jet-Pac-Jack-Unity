@@ -29,8 +29,6 @@ public class GameMaster : MonoBehaviour
 	public TextMeshProUGUI player1ScoreText;                                //  player 1's score
 	public TextMeshProUGUI player1Lives;                                    //  player 1's lives
 
-	// private bool playerAlreadyDead = false;
-
 
 	private void Awake()
 	{
@@ -81,8 +79,6 @@ public class GameMaster : MonoBehaviour
 
 	private void _decrementPlayersLives()
 	{
-		_remainingLives--;
-		player1Lives.text = _remainingLives.ToString();
 
 		if (_remainingLives == 0)
 		{
@@ -91,6 +87,9 @@ public class GameMaster : MonoBehaviour
 		}
 		else
 		{
+			_remainingLives--;
+
+			player1Lives.text = _remainingLives.ToString();
 			StartCoroutine(SpawnSpaceman());
 		}
 	}
@@ -105,7 +104,7 @@ public class GameMaster : MonoBehaviour
 		//  TODO: only spawn the player if there are no enemies nearby. Try using raycast to see what's happening around you.
 		//  SPAWN THE PLAYER AS HE'S BEEN DESTROYED AT THE END OF THE PREVIOUS LOOP
 		Instantiate(spaceman, playerSpawnPoint.transform.position, Quaternion.identity);
-		// playerAlreadyDead = false;
+
 
 	}
 

@@ -10,8 +10,6 @@ public class EnemyBehaviour : MonoBehaviour
 	public float speed = 2f;
 	public int waitBeforeAttack = 3;
 	public GroundContactAction groundContactAction = GroundContactAction.EXPLODE;
-	Vector3 lastVelocity;
-	ContactPoint2D[] contactPoints;
 
 	private Animator anim;
 
@@ -19,7 +17,7 @@ public class EnemyBehaviour : MonoBehaviour
 	private int direction = -1;
 
 	private bool dying = false;
-	private float attackAngleInRad;
+	private float attackAngleInRads;
 
 
 
@@ -38,14 +36,14 @@ public class EnemyBehaviour : MonoBehaviour
 		Destroy(gameObject, 10.0f);
 
 		//	change the attack angle from degrees to radians so the Mathf.Sin() function works in the FixedUpdate() method.
-		attackAngleInRad = attackAngle / Mathf.Rad2Deg;
+		attackAngleInRads = attackAngle / Mathf.Rad2Deg;
 
 	}
 
 	private void FixedUpdate()
 	{
 		if (!dying)
-			rb.MovePosition(new Vector2(transform.position.x + (speed * direction) * Time.fixedDeltaTime, transform.position.y - Mathf.Sin(attackAngleInRad) * Time.fixedDeltaTime));
+			rb.MovePosition(new Vector2(transform.position.x + (speed * direction) * Time.fixedDeltaTime, transform.position.y - Mathf.Sin(attackAngleInRads) * Time.fixedDeltaTime));
 	}
 
 
@@ -63,23 +61,21 @@ public class EnemyBehaviour : MonoBehaviour
 			else if (groundContactAction == GroundContactAction.BOUNCE)
 			{
 
-				//	we need to change the attack angle by +- 270 so that the enemy bouncys off the ball in the same direction (left/right), but at 90 degrees
-				//	to how it came into the wall.
+				//	we need to change the attack angle by +- 270 so that the enemy bouncys off the ground/platforms in the same 
+				//	direction (left/right), but at 90 degrees	to how it came into the wall.
 				//	we then need to change the new angle to radians so the Mathf.Sin() function works in the FixedUpdate() method.
 				if (attackAngle <= 90)
 					attackAngle += 270;
 				else
 					attackAngle -= 270;
 
-				attackAngleInRad = attackAngle / Mathf.Rad2Deg;
+				attackAngleInRads = attackAngle / Mathf.Rad2Deg;
 			}
 
 		}
 
 		if (collider.tag == "Player")
 		{
-			//  call the player dead method
-			// GameMaster.PlayerDied(collider.gameObject);
 
 			//  and kill me
 			dying = true;
@@ -88,11 +84,5 @@ public class EnemyBehaviour : MonoBehaviour
 
 		}
 	}
-
-	private void OnCollisionEnter2D(Collision2D other)
-	{
-		Debug.Log("Collided with " + other.gameObject.name);
-	}
-
 
 }   //  class

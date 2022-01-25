@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -212,7 +213,7 @@ public class Player : MonoBehaviour
 	private void OnTriggerEnter2D(Collider2D collider)
 	{
 
-		if (collider.gameObject.tag == "LiftOffEntrance")
+		if (collider.gameObject.CompareTag("LiftOffEntrance"))
 		{
 			// Debug.Log("SPACEMAN INSIDE");
 			LevelController.SpacemanInside = true;
@@ -221,13 +222,13 @@ public class Player : MonoBehaviour
 
 
 		//  we're on the gound so set the flag
-		if (collider.tag == "Ground")
+		if (collider.CompareTag("Ground"))
 			isGrounded = true;
 
 
 
 		//  if we've been hit by an enemy
-		if (collider.tag == "Enemy")
+		if (collider.CompareTag("Enemy"))
 		{
 			if (!playerIsDying)
 			{
@@ -236,14 +237,14 @@ public class Player : MonoBehaviour
 				foreach (Transform child in transform)
 				{
 
-					if (child.tag == "SpaceshipPart1" || child.tag == "SpaceshipPart2")
+					if (child.CompareTag("SpaceshipPart1") || child.CompareTag("SpaceshipPart2"))
 					{
 						Debug.Log("Decoupling " + child.tag + " from player to " + levelController.spaceship.name);
 						child.parent = levelController.spaceship.transform;
 
 					}
 
-					if (child.tag == "Collectable")
+					if (child.CompareTag("Collectable"))
 					{
 						Debug.Log("Decoupling " + child.name + " from player");
 						child.parent = null;
@@ -269,31 +270,53 @@ public class Player : MonoBehaviour
 					playerAnim.SetBool("Killed", true);
 
 				//  remove the player object after a second
-				Debug.Log("Destroying gameObject:" + gameObject.name + " in 3 seconds");
-				Destroy(gameObject, 3.0f);
+				StartCoroutine(DestroyPlayerAndTwins());
+
 			}
 		}
 	}
 
 
 
-
 	private void OnTriggerExit2D(Collider2D collider)
 	{
-		if (collider.tag == "Ground")
+		if (collider.CompareTag("Ground"))
 			isGrounded = false;
 	}
 
-	IEnumerator EnableTrigger(BoxCollider2D bc2D)
-	{
-		yield return new WaitForSeconds(0.1f);
-		bc2D.isTrigger = false;
-	}
-
-	// private void OnDestroy()
+	// IEnumerator EnableTrigger(BoxCollider2D bc2D)
 	// {
-	// 	Debug.Log("Player OnDestroy");
+	// 	yield return new WaitForSeconds(0.1f);
+	// 	bc2D.isTrigger = false;
 	// }
 
-}
 
+
+	IEnumerator DestroyPlayerAndTwins()
+	{
+
+		List<GameObject> rootObjects = new List<GameObject>();
+		Scene scene = SceneManager.GetActiveScene();
+
+
+		//	first destroy all the Player game objects. This will ensure that, if the player is at the edge of the screen, 
+		//	the new twin will not instantly be created when we kill the Twin.
+		yield return new WaitForSeconds(1.0f);
+		scene.GetRootGameObjects(rootObjects);
+		for (int i = 0; i < rootObjects.Count; ++i)
+		{
+			GameObject gameObject = rootObjects[i];
+			if (gameObject.CompareTag("Player"))
+				Destroy(gameObject);
+		}
+
+		scene.GetRootGameObjects(rootObjects);
+		for (int i = 0; i < rootObjects.Count; ++i)
+		{
+			GameObject gameObject = rootObjects[i];
+			if (gameObject.CompareTag("Twin"))
+				Destroy(gameObject);
+		}
+	}
+
+}

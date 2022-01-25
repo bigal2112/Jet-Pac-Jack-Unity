@@ -552,19 +552,19 @@ MonoBehaviour:
   waves:
   - name: Straight Firey Balls
     enemy: {fileID: 3851745588846516958, guid: 66913ca15c73cac4caf145717da38597, type: 3}
-    count: 1
+    count: 4
     rate: 5
   - name: Angled Firey Balls
     enemy: {fileID: 3851745588846516958, guid: 377b45b8ce45e9d45bf292e546b90626, type: 3}
-    count: 1
+    count: 3
     rate: 10
-  - name: Bouncy Fuzzballs
+  - name: Bouncy Fuzzballs 45
     enemy: {fileID: 7112170060656837483, guid: ecce5b6b78052e44f8140a222a7fea57, type: 3}
-    count: 1
+    count: 4
     rate: 10
-  - name: Angled Bastards
-    enemy: {fileID: 3851745588846516958, guid: 377b45b8ce45e9d45bf292e546b90626, type: 3}
-    count: 2
+  - name: Bouncy Fuzzyballs 30
+    enemy: {fileID: 7112170060656837483, guid: 0a733196a4bea55458aa67a5c797977e, type: 3}
+    count: 3
     rate: 10
   nextWave: 0
   timeBetweenWaves: 5
@@ -808,7 +808,6 @@ GameObject:
   m_Component:
   - component: {fileID: 194287071}
   - component: {fileID: 194287070}
-  - component: {fileID: 194287072}
   m_Layer: 0
   m_Name: PlatformMiddle
   m_TagString: Ground
@@ -861,27 +860,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &194287072
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 194287069}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
 --- !u!1 &210424301
 GameObject:
   m_ObjectHideFlags: 0
@@ -1155,7 +1133,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &264898089
 Transform:
   m_ObjectHideFlags: 0
@@ -3974,7 +3952,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1232429628}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.831, z: 0}
+  m_LocalPosition: {x: 0, y: -3.806, z: 0}
   m_LocalScale: {x: 0.65, y: 0.65, z: 0.65}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5788,7 +5766,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.02214539, y: 4.1490555}
+  m_Offset: {x: 0.041862488, y: 5.3170223}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -5799,7 +5777,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.18801713, y: 9.298111}
+  m_Size: {x: 0.5034914, y: 7}
   m_EdgeRadius: 0
 --- !u!4 &1592953107
 Transform:
@@ -6137,8 +6115,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1685741924}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.8847, y: -0.375, z: 0}
-  m_LocalScale: {x: 17.8747, y: 1.0471488, z: 1}
+  m_LocalPosition: {x: -1.0097003, y: -0.375, z: 0}
+  m_LocalScale: {x: 27.622194, y: 1.0471488, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1022057444}
@@ -7916,7 +7894,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1462755228255267682, guid: c8a340a89dafc0e419e3de4df72ea01f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.831
+      value: -3.814
       objectReference: {fileID: 0}
     - target: {fileID: 1462755228255267682, guid: c8a340a89dafc0e419e3de4df72ea01f, type: 3}
       propertyPath: m_LocalPosition.z

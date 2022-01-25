@@ -81,7 +81,7 @@ public class SpaceshipPartsBehaviour : MonoBehaviour
 				//  save the parent object for later re-attachement
 				parent = gameObject.transform.parent;
 
-				//  assign this object to the player we go where he goes
+				//  assign this object to the player so we go where he goes
 				Transform player = collider.gameObject.transform;
 				gameObject.transform.parent = player;
 				gameObject.transform.position = player.position;
@@ -92,10 +92,10 @@ public class SpaceshipPartsBehaviour : MonoBehaviour
 
 		//  if the player has a part in transit and passes through the drop zone then unhook the
 		//  cell from the player set the state of it to dropping.
-		if (collider.tag == "Dropzone" && state == ObjectState.IN_TRANSIT)
+		if (collider.CompareTag("Dropzone") && state == ObjectState.IN_TRANSIT)
 		{
 
-			//   Debug.Log("Dropping " + gameObject.tag + ". Attaching to ther parent:" + parent.name);
+			// Debug.Log("Dropping " + gameObject.tag + ". Attaching to ther parent:" + parent.name);
 
 			//  remove the part from the player object and assign it back to it's parent
 			gameObject.transform.parent = parent;
@@ -110,15 +110,15 @@ public class SpaceshipPartsBehaviour : MonoBehaviour
 		//  if it is then stop the part moving as it's now docked and inform the levelcontroller
 		//  TODO if it isn't then it means the player died and dropped the part on top of the next part
 		//  TODO so we need to decide what we're going to do with it!!!
-		if (gameObject.tag == "SpaceshipPart2" && collider.tag == "SpaceshipPart3")
+		if (gameObject.tag == "SpaceshipPart2" && collider.tag == "SpaceshipPart3" && state == ObjectState.DROPPING)
 		{
-			//   Debug.Log(gameObject.tag + " docked successfully");
+			// Debug.Log(gameObject.tag + " docked successfully");
 			state = ObjectState.DOCKED;
 			LevelController.NextSpaceshipPart = "SpaceshipPart1";
 		}
-		else if (gameObject.tag == "SpaceshipPart1" && collider.tag == "SpaceshipPart2")
+		else if (gameObject.tag == "SpaceshipPart1" && collider.tag == "SpaceshipPart2" && state == ObjectState.DROPPING)
 		{
-			//   Debug.Log(gameObject.tag + " docked successfully");
+			// Debug.Log(gameObject.tag + " docked successfully");
 			state = ObjectState.DOCKED;
 			LevelController.NextSpaceshipPart = null;
 			LevelController.SpaceshipBuilt = true;

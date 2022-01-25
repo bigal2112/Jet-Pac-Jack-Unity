@@ -102,8 +102,8 @@ public class LevelController : MonoBehaviour
 		fuelCellsDropped = 0;
 
 		//	set the enemy waves allowed for this level loop.
-		enemyWaveFrom = 2;
-		enemyWaveTo = 3;
+		enemyWaveFrom = 0;
+		enemyWaveTo = 1;
 
 		collectablesCounter = 0;
 		spawningCollectable = false;
@@ -335,8 +335,8 @@ public class LevelController : MonoBehaviour
 				enemyWaveTo = 3;
 				break;
 			case 3:
-				enemyWaveFrom = 3;
-				enemyWaveTo = 3;
+				enemyWaveFrom = 4;
+				enemyWaveTo = 5;
 				break;
 			default:
 				Debug.LogError("No currentLevelLoop value present");
@@ -367,18 +367,42 @@ public class LevelController : MonoBehaviour
 
 	IEnumerator SpawnSpaceman()
 	{
+
+		//	wait for another little bit then respawn player.
 		yield return new WaitForSeconds(5.5f);
 
 		Debug.Log("Spawning in LevelController");
 		//  TODO: only spawn the player if there are no enemies nearby. Try using raycast to see what's happening around you.
 		//  SPAWN THE PLAYER AS HE'S BEEN DESTROYED AT THE END OF THE PREVIOUS LOOP
-		Instantiate(spaceman, playerSpawnPoint.transform.position, Quaternion.identity);
+		if (NoPlayersInScene())
+			Instantiate(spaceman, playerSpawnPoint.transform.position, Quaternion.identity);
 
 		SetEnemiesForNextLoop();
 
 		//	the only time this routine gets called is when a new sublevel is started so we can safely start the enemy spawner in here.
 		enemyWaveSpawnerScript.enabled = true;
 
+	}
+
+
+	private bool NoPlayersInScene()
+	{
+
+		//  go through all the game object and if any of them are collectables destroy them
+		List<GameObject> rootObjects = new List<GameObject>();
+		Scene scene = SceneManager.GetActiveScene();
+		scene.GetRootGameObjects(rootObjects);
+		bool noPlayersInScene = true;
+
+		// iterate root objects and do something
+		for (int i = 0; i < rootObjects.Count; i++)
+		{
+			GameObject gameObject = rootObjects[i];
+			if (gameObject.CompareTag("Player"))
+				noPlayersInScene = false;
+		}
+
+		return noPlayersInScene;
 	}
 
 }
