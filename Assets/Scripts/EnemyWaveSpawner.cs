@@ -30,12 +30,12 @@ public class EnemyWaveSpawner : MonoBehaviour
 	void Start()
 	{
 		// Debug.Log("EnemyWaveSpawner: Start()");
-		// lv = LevelController.lvInstance;
+		lv = LevelController.lvInstance;
 
-		// waveCountdown = timeBetweenWaves;
-		// nextWave = lv.enemyWaveFrom;
+		waveCountdown = timeBetweenWaves;
+		nextWave = lv.enemyWaveFrom;
 
-		// state = SpawnState.COUNTING;
+		state = SpawnState.COUNTING;
 	}
 
 	//  use OnEnable() as we disable the spawning of enemies when the rocket launches and re-enable it once we land again
@@ -45,10 +45,10 @@ public class EnemyWaveSpawner : MonoBehaviour
 	{
 		// Debug.Log("EnemyWaveSpawner: OnEnable()");
 		lv = LevelController.lvInstance;
+		if (lv != null)
+			nextWave = lv.enemyWaveFrom;
 
 		waveCountdown = timeBetweenWaves;
-		nextWave = lv.enemyWaveFrom;
-
 		state = SpawnState.COUNTING;
 	}
 
@@ -100,7 +100,9 @@ public class EnemyWaveSpawner : MonoBehaviour
 
 		//  now onto the next wave. If we have gone past the final wave then go back to the first one for this level loop.
 		nextWave++;
-		if (nextWave >= lv.enemyWaveTo)
+		Debug.Log("nextWave:" + nextWave);
+		Debug.Log("lv.enemyWaveTo:" + lv.enemyWaveTo);
+		if (nextWave > lv.enemyWaveTo)
 			nextWave = lv.enemyWaveFrom;
 
 		yield break;

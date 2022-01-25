@@ -29,6 +29,9 @@ public class FuelCellsBehaviour : MonoBehaviour
 
 	private void FixedUpdate()
 	{
+		//	make sure the fuel cell is always facing the correct way
+		gameObject.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+
 		//  if the object is falling from the sky OR has been dropped in the drop zone OR 
 		//	has been dropped by the player getting killed then apply a small downward force to it
 		if (state == ObjectState.FALLING || state == ObjectState.DROPPING || state == ObjectState.PLAYER_DIED)
@@ -98,7 +101,7 @@ public class FuelCellsBehaviour : MonoBehaviour
 			//  give it some physics, make sure it's on the correct X value and rotation
 			gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
 			gameObject.transform.position = new Vector3(dropzoneX, gameObject.transform.position.y, 0f);
-			gameObject.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+
 
 			state = ObjectState.DROPPING;
 

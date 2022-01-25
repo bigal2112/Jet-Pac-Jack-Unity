@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 975491539225337226}
   - component: {fileID: 5950251018200770963}
   m_Layer: 9
-  m_Name: Enemy3
+  m_Name: Enemy4
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: 277942522, guid: 3a3dd747bde7aa340b7dcc62ef787689, type: 3}
-  m_Color: {r: 1, g: 0.5176471, b: 0, a: 1}
+  m_Color: {r: 0.9528302, g: 0.03146139, b: 0.20947258, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -116,9 +116,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b73d763a100a2843b7af7277ac54b13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackAngle: 45
-  speed: 2
-  waitBeforeAttack: 3
+  attackAngle: 55
+  speed: 2.5
+  waitBeforeAttack: 0
   groundContactAction: 1
 --- !u!50 &975491539225337226
 Rigidbody2D:

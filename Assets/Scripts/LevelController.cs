@@ -102,8 +102,8 @@ public class LevelController : MonoBehaviour
 		fuelCellsDropped = 0;
 
 		//	set the enemy waves allowed for this level loop.
-		enemyWaveFrom = 0;
-		enemyWaveTo = 1;
+		enemyWaveFrom = 2;
+		enemyWaveTo = 3;
 
 		collectablesCounter = 0;
 		spawningCollectable = false;
@@ -332,7 +332,7 @@ public class LevelController : MonoBehaviour
 		{
 			case 2:
 				enemyWaveFrom = 2;
-				enemyWaveTo = 2;
+				enemyWaveTo = 3;
 				break;
 			case 3:
 				enemyWaveFrom = 3;

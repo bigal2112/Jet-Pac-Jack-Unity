@@ -31,6 +31,9 @@ public class SpaceshipPartsBehaviour : MonoBehaviour
 
 	private void FixedUpdate()
 	{
+		//	ensure the part is always facing the correct way.
+		gameObject.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+
 		//  if the player has died OR has been dropped in the drop zone then apply a small downward force to it
 		if (state == ObjectState.PLAYER_DIED)
 			rb.MovePosition(new Vector2(transform.position.x, transform.position.y - speed * Time.deltaTime));
