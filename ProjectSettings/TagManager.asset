@@ -15,10 +15,10 @@ TagManager:
   - Part1PickupPoint
   - Part2PickupPoint
   - GM
-  - CeilingTrigger
   - LV
   - LiftOffEntrance
   - Collectable
+  - Ceiling
   layers:
   - Default
   - TransparentFX

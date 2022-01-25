@@ -49,7 +49,7 @@ public class EnemyBehaviour : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collider)
 	{
-		if (collider.tag == "Ground")
+		if (collider.CompareTag("Ground") || collider.CompareTag("Ceiling"))
 		{
 			// Debug.Log("Hit the ground - " + groundContactAction);
 			if (groundContactAction == GroundContactAction.EXPLODE)

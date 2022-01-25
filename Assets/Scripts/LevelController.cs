@@ -94,6 +94,10 @@ public class LevelController : MonoBehaviour
 		readyForNextLevel = true;
 		currentLevelLoop = 1;
 
+		//	set the enemy waves allowed for this level loop.
+		enemyWaveFrom = 2;
+		enemyWaveTo = 3;
+
 		rocketLaunched = false;
 		newLoopStarted = true;
 
@@ -101,9 +105,7 @@ public class LevelController : MonoBehaviour
 		fuelCellsNeeded = 6;
 		fuelCellsDropped = 0;
 
-		//	set the enemy waves allowed for this level loop.
-		enemyWaveFrom = 0;
-		enemyWaveTo = 1;
+
 
 		collectablesCounter = 0;
 		spawningCollectable = false;
@@ -192,7 +194,12 @@ public class LevelController : MonoBehaviour
 
 
 				//  as the spaceship is landing we can start the countdown to spawn the spaceman
-				StartCoroutine(SpawnSpaceman());
+				GameMaster.SpawnSpaceman();
+
+				SetEnemiesForNextLoop();
+
+				//	start the enemy spawner.
+				enemyWaveSpawnerScript.enabled = true;
 
 				//  initialise a few things
 				newLoopStarted = true;
@@ -365,44 +372,41 @@ public class LevelController : MonoBehaviour
 	}
 
 
-	IEnumerator SpawnSpaceman()
-	{
+	// IEnumerator SpawnSpaceman()
+	// {
 
-		//	wait for another little bit then respawn player.
-		yield return new WaitForSeconds(5.5f);
+	// 	//	wait for another little bit then respawn player.
+	// 	yield return new WaitForSeconds(5.5f);
 
-		Debug.Log("Spawning in LevelController");
-		//  TODO: only spawn the player if there are no enemies nearby. Try using raycast to see what's happening around you.
-		//  SPAWN THE PLAYER AS HE'S BEEN DESTROYED AT THE END OF THE PREVIOUS LOOP
-		if (NoPlayersInScene())
-			Instantiate(spaceman, playerSpawnPoint.transform.position, Quaternion.identity);
-
-		SetEnemiesForNextLoop();
-
-		//	the only time this routine gets called is when a new sublevel is started so we can safely start the enemy spawner in here.
-		enemyWaveSpawnerScript.enabled = true;
-
-	}
+	// 	Debug.Log("Spawning in LevelController");
+	// 	//  TODO: only spawn the player if there are no enemies nearby. Try using raycast to see what's happening around you.
+	// 	//  SPAWN THE PLAYER AS HE'S BEEN DESTROYED AT THE END OF THE PREVIOUS LOOP
+	// 	if (NoPlayersInScene())
+	// 		Instantiate(spaceman, playerSpawnPoint.transform.position, Quaternion.identity);
 
 
-	private bool NoPlayersInScene()
-	{
 
-		//  go through all the game object and if any of them are collectables destroy them
-		List<GameObject> rootObjects = new List<GameObject>();
-		Scene scene = SceneManager.GetActiveScene();
-		scene.GetRootGameObjects(rootObjects);
-		bool noPlayersInScene = true;
+	// }
 
-		// iterate root objects and do something
-		for (int i = 0; i < rootObjects.Count; i++)
-		{
-			GameObject gameObject = rootObjects[i];
-			if (gameObject.CompareTag("Player"))
-				noPlayersInScene = false;
-		}
 
-		return noPlayersInScene;
-	}
+	// private bool NoPlayersInScene()
+	// {
+
+	// 	//  go through all the game object and if any of them are collectables destroy them
+	// 	List<GameObject> rootObjects = new List<GameObject>();
+	// 	Scene scene = SceneManager.GetActiveScene();
+	// 	scene.GetRootGameObjects(rootObjects);
+	// 	bool noPlayersInScene = true;
+
+	// 	// iterate root objects and do something
+	// 	for (int i = 0; i < rootObjects.Count; i++)
+	// 	{
+	// 		GameObject gameObject = rootObjects[i];
+	// 		if (gameObject.CompareTag("Player"))
+	// 			noPlayersInScene = false;
+	// 	}
+
+	// 	return noPlayersInScene;
+	// }
 
 }

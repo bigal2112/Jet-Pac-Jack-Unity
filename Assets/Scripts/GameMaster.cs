@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameMaster : MonoBehaviour
 {
@@ -90,22 +91,60 @@ public class GameMaster : MonoBehaviour
 			_remainingLives--;
 
 			player1Lives.text = _remainingLives.ToString();
-			StartCoroutine(SpawnSpaceman());
+			SpawnSpaceman();
 		}
 	}
 
 
-
-	IEnumerator SpawnSpaceman()
+	//	S  p  a  w  n  S  p  a  c  e  m  a  n
+	//	-----------------------------------------------------------------------------------------------------
+	//
+	//	Publically accessable method to start the spawning of a new spaceman. This calls the private method
+	//	_spawnSpaceman() which in turn starts the co-routine StartSpawningTheSpaceman() which does the actual
+	//	work.
+	//
+	public static void SpawnSpaceman()
 	{
+		gmInstance._spawnSpaceman();
+	}
+
+	private void _spawnSpaceman()
+	{
+		StartCoroutine(StartSpawningTheSpaceman());
+	}
+
+
+
+	IEnumerator StartSpawningTheSpaceman()
+	{
+
+		//	wait for another little bit then respawn player.
 		yield return new WaitForSeconds(5.5f);
 
-		Debug.Log("Spawning in GameMaster");
 		//  TODO: only spawn the player if there are no enemies nearby. Try using raycast to see what's happening around you.
 		//  SPAWN THE PLAYER AS HE'S BEEN DESTROYED AT THE END OF THE PREVIOUS LOOP
-		Instantiate(spaceman, playerSpawnPoint.transform.position, Quaternion.identity);
+		if (NoPlayersInScene())
+			Instantiate(spaceman, playerSpawnPoint.transform.position, Quaternion.identity);
+	}
 
+	private bool NoPlayersInScene()
+	{
 
+		//  go through all the game object and if any of them are collectables destroy them
+		List<GameObject> rootObjects = new List<GameObject>();
+		Scene scene = SceneManager.GetActiveScene();
+		scene.GetRootGameObjects(rootObjects);
+		bool noPlayersInScene = true;
+
+		// iterate root objects and do something
+		for (int i = 0; i < rootObjects.Count; i++)
+		{
+			GameObject gameObject = rootObjects[i];
+			if (gameObject.CompareTag("Player"))
+				noPlayersInScene = false;
+		}
+
+		return noPlayersInScene;
 	}
 
 }
