@@ -23,7 +23,7 @@ public class EnemyBehaviour : MonoBehaviour
 
 	void Start()
 	{
-		Debug.Log("X:" + (transform.position.x).ToString());
+		// Debug.Log("X:" + (transform.position.x).ToString());
 
 		//  if we've been spawned on the left-hand side then birl us around so we're pointing the right way
 		if (transform.position.x < 0)
@@ -49,6 +49,7 @@ public class EnemyBehaviour : MonoBehaviour
 
 	private void FixedUpdate()
 	{
+
 		if (!dying)
 			rb.MovePosition(new Vector2(transform.position.x + (speed * direction) * Time.fixedDeltaTime, transform.position.y - Mathf.Sin(attackAngleInRads) * Time.fixedDeltaTime));
 	}

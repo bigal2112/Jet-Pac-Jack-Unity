@@ -17,7 +17,7 @@ public class EnemyBehaviour1 : MonoBehaviour
 	private Rigidbody2D rb;
 
 	private bool dying = false;
-
+	private float yValue;
 
 	void Start()
 	{
@@ -26,8 +26,6 @@ public class EnemyBehaviour1 : MonoBehaviour
 		rb = GetComponent<Rigidbody2D>();
 		anim = GetComponent<Animator>();
 
-		//	TODO: get a ramdon number between -1 and 1 to use as the y value so the up/down direction and angle is erm random!
-
 		//  if we've been spawned on the left-hand side then birl us around so we're pointing the right way
 		//	and set us off in a left-to-right direction by using a +ve value for the x
 		if (transform.position.x < 0)
@@ -35,13 +33,15 @@ public class EnemyBehaviour1 : MonoBehaviour
 			if (!mirrorImage)
 				transform.rotation = Quaternion.Euler(0f, 180f, 0f);
 
-			// set our enemy on its merry way. 
-			rb.velocity = new Vector2(1, -0.5f) * speed;
+			// Calculate a random y value between -1 and 1 and set our enemy on its merry way. 
+			yValue = Random.Range(-10, 11) / 10.0f;
+			rb.velocity = new Vector2(1, yValue) * speed;
 		}
 		else
 		{
-			// set our enemy on its merry way but in a right-to-left direction by using a -ve value for the x
-			rb.velocity = new Vector3(-1, -0.5f, 0) * speed;
+			// // Calculate a random y value between -1 and 1 and set our enemy on its merry way but in a right-to-left direction by using a -ve value for the x
+			yValue = Random.Range(-10, 11) / 10.0f;
+			rb.velocity = new Vector2(1, yValue) * speed;
 		}
 
 		// freeze the rotation so it doesnt go spinning after a collision
@@ -54,7 +54,6 @@ public class EnemyBehaviour1 : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-
 		// if we're dying then stop us moving.
 		if (dying)
 			rb.velocity = Vector2.zero;
@@ -87,7 +86,6 @@ public class EnemyBehaviour1 : MonoBehaviour
 
 		if (collider.tag == "Player")
 		{
-
 			//  and kill me
 			dying = true;
 			anim.SetBool("KillMe", true);

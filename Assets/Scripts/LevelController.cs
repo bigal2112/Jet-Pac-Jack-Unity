@@ -95,8 +95,8 @@ public class LevelController : MonoBehaviour
 		currentLevelLoop = 1;
 
 		//	set the enemy waves allowed for this level loop.
-		enemyWaveFrom = 0;
-		enemyWaveTo = 1;
+		enemyWaveFrom = 2;
+		enemyWaveTo = 3;
 
 		rocketLaunched = false;
 		newLoopStarted = true;
