@@ -10,9 +10,9 @@ public class EnemyBehaviour : MonoBehaviour
 	public float speed = 2f;
 	public int waitBeforeAttack = 3;
 	public GroundContactAction groundContactAction = GroundContactAction.EXPLODE;
+	public bool mirrorImage;
 
 	private Animator anim;
-
 	private Rigidbody2D rb;
 	private int direction = -1;
 
@@ -23,12 +23,19 @@ public class EnemyBehaviour : MonoBehaviour
 
 	void Start()
 	{
+		Debug.Log("X:" + (transform.position.x).ToString());
+
 		//  if we've been spawned on the left-hand side then birl us around so we're pointing the right way
 		if (transform.position.x < 0)
 		{
-			transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+			if (!mirrorImage)
+				transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+
 			direction = 1;
+			attackAngle += 90;
 		}
+
+		// Debug.Log("attackAngle:" + attackAngle);
 
 		rb = GetComponent<Rigidbody2D>();
 		anim = GetComponent<Animator>();
@@ -65,9 +72,20 @@ public class EnemyBehaviour : MonoBehaviour
 				//	direction (left/right), but at 90 degrees	to how it came into the wall.
 				//	we then need to change the new angle to radians so the Mathf.Sin() function works in the FixedUpdate() method.
 				if (attackAngle <= 90)
-					attackAngle += 270;
-				else
-					attackAngle -= 270;
+					attackAngle += 90;
+				else if (attackAngle <= 180)
+					attackAngle -= 90;
+				else if (attackAngle <= 270)
+					attackAngle += 90;
+				else if (attackAngle <= 360)
+					attackAngle -= 90;
+
+				// Debug.Log("attackAngle:" + attackAngle);
+
+				// if (attackAngle <= 90)
+				// 	attackAngle += 270;
+				// else
+				// 	attackAngle -= 270;
 
 				attackAngleInRads = attackAngle / Mathf.Rad2Deg;
 			}

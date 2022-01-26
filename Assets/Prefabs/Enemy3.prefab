@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 7112170060656837483}
   - component: {fileID: 2967051104866027030}
   - component: {fileID: 2062456490248659644}
-  - component: {fileID: 8909329007709465525}
-  - component: {fileID: 975491539225337226}
   - component: {fileID: 5950251018200770963}
+  - component: {fileID: 2872322945544782544}
+  - component: {fileID: -1449621269985428944}
   m_Layer: 9
   m_Name: Enemy3
   m_TagString: Enemy
@@ -101,46 +101,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.083737135, y: -0.0041869283}
+  m_Offset: {x: 0.02227509, y: -0.0138243735}
   serializedVersion: 2
-  m_Radius: 0.3030581
---- !u!114 &8909329007709465525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3994216106931003871}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b73d763a100a2843b7af7277ac54b13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackAngle: 45
-  speed: 2
-  waitBeforeAttack: 3
-  groundContactAction: 1
---- !u!50 &975491539225337226
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3994216106931003871}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 4
+  m_Radius: 0.4122825
 --- !u!95 &5950251018200770963
 Animator:
   serializedVersion: 4
@@ -161,3 +124,43 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2872322945544782544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3994216106931003871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f87bb4d0dffd3bd49ad4456f3092fdba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackAngle: 21
+  speed: 2
+  waitBeforeAttack: 3
+  groundContactAction: 1
+  mirrorImage: 0
+  reflectedVelocity: {x: 0, y: 0, z: 0}
+  contact: {x: 0, y: 0, z: 0}
+--- !u!50 &-1449621269985428944
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3994216106931003871}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4

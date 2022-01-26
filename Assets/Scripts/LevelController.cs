@@ -95,14 +95,14 @@ public class LevelController : MonoBehaviour
 		currentLevelLoop = 1;
 
 		//	set the enemy waves allowed for this level loop.
-		enemyWaveFrom = 2;
-		enemyWaveTo = 3;
+		enemyWaveFrom = 0;
+		enemyWaveTo = 1;
 
 		rocketLaunched = false;
 		newLoopStarted = true;
 
 		//  initialise properties
-		fuelCellsNeeded = 6;
+		fuelCellsNeeded = 1;
 		fuelCellsDropped = 0;
 
 
@@ -191,7 +191,7 @@ public class LevelController : MonoBehaviour
 				//  now play the landing spaceship animation
 				spaceshipAnim.SetBool("LaunchSpaceship", false);
 				spaceshipAnim.SetBool("LandSpaceship", true);
-
+				StartCoroutine(ControlRocketBurn(false));
 
 				//  as the spaceship is landing we can start the countdown to spawn the spaceman
 				GameMaster.SpawnSpaceman();
@@ -211,8 +211,31 @@ public class LevelController : MonoBehaviour
 		}
 
 		readyForNextLevel = false;
+	}
 
 
+	IEnumerator ControlRocketBurn(bool launching)
+	{
+		if (launching)
+		{
+
+			yield return new WaitForSeconds(0.1f);
+			Debug.Log("Starting rockets");
+			spaceshipAnim.SetBool("FireRockets", true);
+
+		}
+		else
+		{
+
+			spaceshipAnim.SetBool("FireRockets", true);
+			yield return new WaitForSeconds(4.9f);
+			Debug.Log("Stopping rockets");
+			spaceshipAnim.SetBool("FireRockets", false);
+
+		}
+
+
+		yield break;
 	}
 
 
@@ -323,6 +346,9 @@ public class LevelController : MonoBehaviour
 		//  launch the spaceship
 		spaceshipAnim.SetBool("LandSpaceship", false);
 		spaceshipAnim.SetBool("LaunchSpaceship", true);
+
+		StartCoroutine(ControlRocketBurn(true));
+
 
 		//  wait for 5 seconds then go onto the next level
 		yield return new WaitForSeconds(5.0f);
