@@ -41,7 +41,7 @@ public class EnemyBehaviour1 : MonoBehaviour
 		{
 			// // Calculate a random y value between -1 and 1 and set our enemy on its merry way but in a right-to-left direction by using a -ve value for the x
 			yValue = Random.Range(-10, 11) / 10.0f;
-			rb.velocity = new Vector2(1, yValue) * speed;
+			rb.velocity = new Vector2(-1, yValue) * speed;
 		}
 
 		// freeze the rotation so it doesnt go spinning after a collision

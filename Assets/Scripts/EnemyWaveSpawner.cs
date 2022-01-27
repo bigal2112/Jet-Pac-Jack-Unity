@@ -27,10 +27,14 @@ public class EnemyWaveSpawner : MonoBehaviour
 
 	private LevelController lv;
 
+	[SerializeField] private bool[] spawnPointUsed;
+
 	void Start()
 	{
 		// Debug.Log("EnemyWaveSpawner: Start()");
 		lv = LevelController.lvInstance;
+
+		spawnPointUsed = new bool[enemySpawnPoints.Length];
 
 		waveCountdown = timeBetweenWaves;
 		nextWave = lv.enemyWaveFrom;
@@ -81,7 +85,12 @@ public class EnemyWaveSpawner : MonoBehaviour
 	IEnumerator SpawnWave(Wave _wave)
 	{
 		state = SpawnState.SPAWNING;
-		// Debug.Log("SPAWNING WAVE: " + _wave.name);
+
+		//	initialise the spawnPointUsed array
+		for (int i = 0; i < enemySpawnPoints.Length; i++)
+		{
+			spawnPointUsed[i] = false;
+		}
 
 		//  loop through how many enemies are in this wave
 		for (int i = 0; i < _wave.count; i++)
@@ -110,15 +119,24 @@ public class EnemyWaveSpawner : MonoBehaviour
 	private void SpawnEnemy(Transform _enemy)
 	{
 
-		// Debug.Log("  SPAWNING ENEMY: " + _enemy.name);
-
-		//  find a random spawn point
-		Vector3 spawnPoint = enemySpawnPoints[Random.Range(0, enemySpawnPoints.Length)].position;
-
-		//  spawn the enemy
-		Transform theEnemy = Instantiate(_enemy, spawnPoint, Quaternion.identity);
+		int newPoint;
 
 
+
+		//	while we're looking for a free spaw point
+		while (true)
+		{
+			newPoint = Random.Range(0, enemySpawnPoints.Length);
+			if (spawnPointUsed[newPoint] == false)
+			{
+				spawnPointUsed[newPoint] = true;
+				break;
+			}
+		}
+
+		Debug.Log("Spawning @ point " + newPoint);
+		//  we've got a free spawn point so spawn the enemy at it.
+		Transform theEnemy = Instantiate(_enemy, enemySpawnPoints[newPoint].position, Quaternion.identity);
 	}
 
 }       //  class
