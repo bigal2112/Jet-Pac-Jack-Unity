@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2146736}
   m_Layer: 0
-  m_Name: EnemySpawnPoints (12)
+  m_Name: EnemySpawnPoint (13)
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -152,7 +152,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1786387258}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &15654156
 GameObject:
@@ -164,7 +164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 15654157}
   m_Layer: 0
-  m_Name: EnemySpawnPoints (13)
+  m_Name: EnemySpawnPoint (11)
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -183,7 +183,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1786387258}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &53548359
 GameObject:
@@ -195,7 +195,7 @@ GameObject:
   m_Component:
   - component: {fileID: 53548360}
   m_Layer: 0
-  m_Name: EnemySpawnPoints (10)
+  m_Name: EnemySpawnPoint (12)
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -214,7 +214,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1786387258}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &66747316
 GameObject:
@@ -680,7 +680,7 @@ GameObject:
   m_Component:
   - component: {fileID: 153887866}
   m_Layer: 0
-  m_Name: EnemySpawnPoints (7)
+  m_Name: EnemySpawnPoint (9)
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -699,7 +699,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1786387258}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &160652923
 GameObject:
@@ -889,13 +889,13 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 962599458}
-  - {fileID: 1297720061}
   - {fileID: 1276435808}
-  - {fileID: 1668683772}
   - {fileID: 959032459}
-  - {fileID: 1180234380}
   - {fileID: 936575938}
+  - {fileID: 1297720061}
+  - {fileID: 962599458}
+  - {fileID: 1180234380}
+  - {fileID: 1668683772}
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3216,7 +3216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 936575938}
   m_Layer: 0
-  m_Name: EnemySpawnPoints (6)
+  m_Name: EnemySpawnPoint (2)
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -3235,7 +3235,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 210424302}
-  m_RootOrder: 6
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &959032458
 GameObject:
@@ -3247,7 +3247,7 @@ GameObject:
   m_Component:
   - component: {fileID: 959032459}
   m_Layer: 0
-  m_Name: EnemySpawnPoints (4)
+  m_Name: EnemySpawnPoint (1)
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -3266,7 +3266,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 210424302}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &962599457
 GameObject:
@@ -3278,7 +3278,7 @@ GameObject:
   m_Component:
   - component: {fileID: 962599458}
   m_Layer: 0
-  m_Name: EnemySpawnPoints
+  m_Name: EnemySpawnPoint (4)
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -3297,7 +3297,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 210424302}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &965315144
 GameObject:
@@ -3393,7 +3393,7 @@ GameObject:
   m_Component:
   - component: {fileID: 967336601}
   m_Layer: 0
-  m_Name: EnemySpawnPoints (11)
+  m_Name: EnemySpawnPoint (8)
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -3412,7 +3412,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1786387258}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1022057442
 GameObject:
@@ -3591,7 +3591,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1180234380}
   m_Layer: 0
-  m_Name: EnemySpawnPoints (5)
+  m_Name: EnemySpawnPoint (5)
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -3794,9 +3794,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1232429629}
+  - component: {fileID: 1232429630}
   m_Layer: 0
   m_Name: PlayerSpawnPoint
-  m_TagString: Untagged
+  m_TagString: Respawn
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3816,6 +3817,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &1232429630
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1232429628}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 3.2255886
 --- !u!1 &1236190638
 GameObject:
   m_ObjectHideFlags: 0
@@ -4302,7 +4319,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1276435808}
   m_Layer: 0
-  m_Name: EnemySpawnPoints (2)
+  m_Name: EnemySpawnPoint (0)
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -4321,7 +4338,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 210424302}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1278019565
 GameObject:
@@ -4364,7 +4381,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1297720061}
   m_Layer: 0
-  m_Name: EnemySpawnPoints (1)
+  m_Name: EnemySpawnPoint (3)
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -4383,7 +4400,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 210424302}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1328576909
 GameObject:
@@ -5975,7 +5992,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1668683772}
   m_Layer: 0
-  m_Name: EnemySpawnPoints (3)
+  m_Name: EnemySpawnPoint (6)
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -5994,7 +6011,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 210424302}
-  m_RootOrder: 3
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1685150100 stripped
 Transform:
@@ -6518,13 +6535,13 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1975627409}
+  - {fileID: 967336601}
   - {fileID: 153887866}
   - {fileID: 1944724543}
-  - {fileID: 1975627409}
-  - {fileID: 53548360}
-  - {fileID: 967336601}
-  - {fileID: 2146736}
   - {fileID: 15654157}
+  - {fileID: 53548360}
+  - {fileID: 2146736}
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7254,7 +7271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1944724543}
   m_Layer: 0
-  m_Name: EnemySpawnPoints (8)
+  m_Name: EnemySpawnPoint (10)
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -7273,7 +7290,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1786387258}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1975627408
 GameObject:
@@ -7285,7 +7302,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1975627409}
   m_Layer: 0
-  m_Name: EnemySpawnPoints (9)
+  m_Name: EnemySpawnPoint (7)
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -7304,7 +7321,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1786387258}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2015827395
 GameObject:

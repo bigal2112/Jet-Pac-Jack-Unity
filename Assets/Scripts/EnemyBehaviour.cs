@@ -19,7 +19,7 @@ public class EnemyBehaviour : MonoBehaviour
 	private bool dying = false;
 	private float attackAngleInRads;
 
-
+	private bool inTheRespawnBubble;
 
 	void Start()
 	{
@@ -62,6 +62,8 @@ public class EnemyBehaviour : MonoBehaviour
 			// Debug.Log("Hit the ground - " + groundContactAction);
 			if (groundContactAction == GroundContactAction.EXPLODE)
 			{
+				if (inTheRespawnBubble) GameMaster.EnemiesInRespawnBubble--;
+
 				dying = true;
 				anim.SetBool("KillMe", true);
 				Destroy(gameObject, 1.0f);
@@ -96,12 +98,33 @@ public class EnemyBehaviour : MonoBehaviour
 		if (collider.tag == "Player")
 		{
 
+			//	if we've killed the player and we're in the respawn bubble then reduce the
+			//	count by 1 as we're just about to explode.....
+			if (inTheRespawnBubble) GameMaster.EnemiesInRespawnBubble--;
+
 			//  and kill me
 			dying = true;
 			anim.SetBool("KillMe", true);
 			Destroy(gameObject, 1.0f);
 
 		}
+
+		if (collider.CompareTag("Respawn"))
+		{
+			inTheRespawnBubble = true;
+			GameMaster.EnemiesInRespawnBubble++;
+		}
+	}
+
+
+	private void OnTriggerExit2D(Collider2D collider)
+	{
+		if (collider.CompareTag("Respawn"))
+		{
+			inTheRespawnBubble = false;
+			GameMaster.EnemiesInRespawnBubble--;
+		}
+
 	}
 
 }   //  class

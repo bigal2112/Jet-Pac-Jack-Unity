@@ -18,6 +18,7 @@ public class EnemyBehaviour1 : MonoBehaviour
 
 	private bool dying = false;
 	private float yValue;
+	private bool inTheRespawnBubble;
 
 	void Start()
 	{
@@ -25,6 +26,8 @@ public class EnemyBehaviour1 : MonoBehaviour
 		//	get the component we need
 		rb = GetComponent<Rigidbody2D>();
 		anim = GetComponent<Animator>();
+
+		inTheRespawnBubble = false;
 
 		//  if we've been spawned on the left-hand side then birl us around so we're pointing the right way
 		//	and set us off in a left-to-right direction by using a +ve value for the x
@@ -84,14 +87,34 @@ public class EnemyBehaviour1 : MonoBehaviour
 
 		}
 
-		if (collider.tag == "Player")
+		if (collider.CompareTag("Player"))
 		{
+			//	if we've killed the player and we're in the respawn bubble then reduce the
+			//	count by 1 as we're just about to explode.....
+			if (inTheRespawnBubble) GameMaster.EnemiesInRespawnBubble--;
+
 			//  and kill me
 			dying = true;
 			anim.SetBool("KillMe", true);
 			Destroy(gameObject, 1.0f);
+		}
 
+		if (collider.CompareTag("Respawn"))
+		{
+			inTheRespawnBubble = true;
+			GameMaster.EnemiesInRespawnBubble++;
 		}
 	}
+
+
+	private void OnTriggerExit2D(Collider2D collider)
+	{
+		if (collider.CompareTag("Respawn"))
+		{
+			inTheRespawnBubble = false;
+			GameMaster.EnemiesInRespawnBubble--;
+		}
+	}
+
 
 }   //  class

@@ -30,6 +30,13 @@ public class GameMaster : MonoBehaviour
 	public TextMeshProUGUI player1ScoreText;                                //  player 1's score
 	public TextMeshProUGUI player1Lives;                                    //  player 1's lives
 
+	private static int _enemiesInRespawnBubble = 0;
+	public static int EnemiesInRespawnBubble
+	{
+		set { _enemiesInRespawnBubble = value; }
+		get { return _enemiesInRespawnBubble; }
+	}
+
 
 	private void Awake()
 	{
@@ -51,7 +58,6 @@ public class GameMaster : MonoBehaviour
 			DontDestroyOnLoad(this);
 		}
 	}
-
 
 
 	//  I  n  c  r  e  m  e  n  t  P  l  a  y  e  r  1  S  c  o  r  e
@@ -121,7 +127,15 @@ public class GameMaster : MonoBehaviour
 		//	wait for another little bit then respawn player.
 		yield return new WaitForSeconds(5.5f);
 
-		//  TODO: only spawn the player if there are no enemies nearby. Try using raycast to see what's happening around you.
+		//	this will wait until there are no enemies in the respawn bubble before respawing the player.
+		while (true)
+		{
+			if (_enemiesInRespawnBubble == 0)
+				break;
+
+			yield return new WaitForSeconds(0.1f);
+		}
+
 		//  SPAWN THE PLAYER AS HE'S BEEN DESTROYED AT THE END OF THE PREVIOUS LOOP
 		if (NoPlayersInScene())
 			Instantiate(spaceman, playerSpawnPoint.transform.position, Quaternion.identity);

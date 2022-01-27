@@ -27,7 +27,7 @@ public class EnemyWaveSpawner : MonoBehaviour
 
 	private LevelController lv;
 
-	[SerializeField] private bool[] spawnPointUsed;
+	private bool[] spawnPointUsed;
 
 	void Start()
 	{
@@ -121,8 +121,6 @@ public class EnemyWaveSpawner : MonoBehaviour
 
 		int newPoint;
 
-
-
 		//	while we're looking for a free spaw point
 		while (true)
 		{
@@ -134,7 +132,6 @@ public class EnemyWaveSpawner : MonoBehaviour
 			}
 		}
 
-		Debug.Log("Spawning @ point " + newPoint);
 		//  we've got a free spawn point so spawn the enemy at it.
 		Transform theEnemy = Instantiate(_enemy, enemySpawnPoints[newPoint].position, Quaternion.identity);
 	}
