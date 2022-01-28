@@ -512,6 +512,8 @@ MonoBehaviour:
   collectables:
   - {fileID: 8796990939630700307, guid: 6a799b1847f14214b86991cd6989a89c, type: 3}
   - {fileID: 8796990939630700307, guid: a3d083f038d3b6249a45ff087ab66260, type: 3}
+  - {fileID: 7628116280633964572, guid: b246410948886fd45a993382b613d0c8, type: 3}
+  - {fileID: 4992431479969505642, guid: 3dc8cd9373e5a7a43b23e18f71cec090, type: 3}
   enemyWaveSpawnerScript: {fileID: 142998743}
   spaceship: {fileID: 1628440953}
   liftOffEntrance: {fileID: 1217306578}
@@ -6678,6 +6680,7 @@ MonoBehaviour:
   spaceman: {fileID: 6691947510385749004, guid: c8a340a89dafc0e419e3de4df72ea01f, type: 3}
   player1ScoreText: {fileID: 661550314}
   player1Lives: {fileID: 1585585019}
+  EnemiesInMyBubble: 0
 --- !u!212 &1826766076
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7812,6 +7815,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 492019352208861426, guid: c8a340a89dafc0e419e3de4df72ea01f, type: 3}
+      propertyPath: bullet1
+      value: 
+      objectReference: {fileID: 5103272789700907937, guid: 4d88efaf717e33c41a777ecb881ddd1a, type: 3}
+    - target: {fileID: 492019352208861426, guid: c8a340a89dafc0e419e3de4df72ea01f, type: 3}
+      propertyPath: bullet3
+      value: 
+      objectReference: {fileID: 2153584312278539030, guid: 81a2e8d5b3da44f4297b4a6d3305f6ec, type: 3}
     - target: {fileID: 1462755228255267682, guid: c8a340a89dafc0e419e3de4df72ea01f, type: 3}
       propertyPath: m_RootOrder
       value: 17
@@ -7854,10 +7865,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1462755228255267682, guid: c8a340a89dafc0e419e3de4df72ea01f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1475271231170872980, guid: c8a340a89dafc0e419e3de4df72ea01f, type: 3}
-      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6691947510385749004, guid: c8a340a89dafc0e419e3de4df72ea01f, type: 3}

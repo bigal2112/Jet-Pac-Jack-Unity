@@ -19,6 +19,7 @@ TagManager:
   - LiftOffEntrance
   - Collectable
   - Ceiling
+  - Bullet
   layers:
   - Default
   - TransparentFX

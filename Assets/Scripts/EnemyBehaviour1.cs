@@ -12,6 +12,7 @@ public class EnemyBehaviour1 : MonoBehaviour
 	public int waitBeforeAttack = 3;
 	public bool mirrorImage;
 	public GroundContactAction groundContactAction = GroundContactAction.EXPLODE;
+	public int scoreValue = 35;
 
 	private Animator anim;
 	private Rigidbody2D rb;
@@ -26,6 +27,7 @@ public class EnemyBehaviour1 : MonoBehaviour
 		//	get the component we need
 		rb = GetComponent<Rigidbody2D>();
 		anim = GetComponent<Animator>();
+		GetComponent<SpriteRenderer>().color = GameMaster.GetRandomColor();
 
 		inTheRespawnBubble = false;
 
@@ -67,36 +69,62 @@ public class EnemyBehaviour1 : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collider)
 	{
-		if (collider.CompareTag("Ground") || collider.CompareTag("Ceiling"))
+		if (!dying)
 		{
-			// Debug.Log("Hit the " + collider.name + " - " + groundContactAction);
-
-			if (groundContactAction == GroundContactAction.EXPLODE)
+			if (collider.CompareTag("Ground") || collider.CompareTag("Ceiling"))
 			{
+				// Debug.Log("Hit the " + collider.name + " - " + groundContactAction);
+
+				if (groundContactAction == GroundContactAction.EXPLODE)
+				{
+					//	if we've killed the player and we're in the respawn bubble then reduce the
+					//	count by 1 as we're just about to explode.....
+					if (inTheRespawnBubble) GameMaster.EnemiesInRespawnBubble--;
+
+					dying = true;
+					anim.SetBool("KillMe", true);
+					Destroy(gameObject, 1.0f);
+				}
+				else if (groundContactAction == GroundContactAction.BOUNCE)
+				{
+
+					// make us bounce off the collider by negating the y value of our velocity
+					rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * -1); ;
+
+				}
+
+			}
+		}
+
+		if (collider.CompareTag("Bullet"))
+		{
+			if (!dying)
+			{
+				//	if we've killed the player and we're in the respawn bubble then reduce the
+				//	count by 1 as we're just about to explode.....
+				if (inTheRespawnBubble) GameMaster.EnemiesInRespawnBubble--;
+
+				dying = true;
+				anim.SetBool("KillMe", true);
+				Destroy(gameObject, 1.0f);
+				GameMaster.IncrementPlayer1Score(scoreValue);
+			}
+		}
+
+
+		if (collider.CompareTag("Player"))
+		{
+			if (!dying)
+			{
+				//	if we've killed the player and we're in the respawn bubble then reduce the
+				//	count by 1 as we're just about to explode.....
+				if (inTheRespawnBubble) GameMaster.EnemiesInRespawnBubble--;
+
+				//  and kill me
 				dying = true;
 				anim.SetBool("KillMe", true);
 				Destroy(gameObject, 1.0f);
 			}
-			else if (groundContactAction == GroundContactAction.BOUNCE)
-			{
-
-				// make us bounce off the collider by negating the y value of our velocity
-				rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * -1); ;
-
-			}
-
-		}
-
-		if (collider.CompareTag("Player"))
-		{
-			//	if we've killed the player and we're in the respawn bubble then reduce the
-			//	count by 1 as we're just about to explode.....
-			if (inTheRespawnBubble) GameMaster.EnemiesInRespawnBubble--;
-
-			//  and kill me
-			dying = true;
-			anim.SetBool("KillMe", true);
-			Destroy(gameObject, 1.0f);
 		}
 
 		if (collider.CompareTag("Respawn"))

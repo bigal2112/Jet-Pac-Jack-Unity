@@ -11,6 +11,7 @@ public class EnemyBehaviour : MonoBehaviour
 	public int waitBeforeAttack = 3;
 	public GroundContactAction groundContactAction = GroundContactAction.EXPLODE;
 	public bool mirrorImage;
+	public int scoreValue = 25;
 
 	private Animator anim;
 	private Rigidbody2D rb;
@@ -39,6 +40,7 @@ public class EnemyBehaviour : MonoBehaviour
 
 		rb = GetComponent<Rigidbody2D>();
 		anim = GetComponent<Animator>();
+		GetComponent<SpriteRenderer>().color = GameMaster.GetRandomColor();
 
 		Destroy(gameObject, 10.0f);
 
@@ -57,56 +59,58 @@ public class EnemyBehaviour : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collider)
 	{
-		if (collider.CompareTag("Ground") || collider.CompareTag("Ceiling"))
+		if (!dying)
 		{
-			// Debug.Log("Hit the ground - " + groundContactAction);
-			if (groundContactAction == GroundContactAction.EXPLODE)
+
+			if (collider.CompareTag("Ground") || collider.CompareTag("Ceiling") || collider.CompareTag("Bullet"))
 			{
-				if (inTheRespawnBubble) GameMaster.EnemiesInRespawnBubble--;
+				// Debug.Log("Hit the ground - " + groundContactAction);
+				if (groundContactAction == GroundContactAction.EXPLODE)
+				{
+					if (inTheRespawnBubble) GameMaster.EnemiesInRespawnBubble--;
 
-				dying = true;
-				anim.SetBool("KillMe", true);
-				Destroy(gameObject, 1.0f);
+					dying = true;
+					anim.SetBool("KillMe", true);
+					Destroy(gameObject, 1.0f);
+
+					if (collider.CompareTag("Bullet"))
+						GameMaster.IncrementPlayer1Score(scoreValue);
+				}
+				else if (groundContactAction == GroundContactAction.BOUNCE)
+				{
+
+					//	we need to change the attack angle by +- 270 so that the enemy bouncys off the ground/platforms in the same 
+					//	direction (left/right), but at 90 degrees	to how it came into the wall.
+					//	we then need to change the new angle to radians so the Mathf.Sin() function works in the FixedUpdate() method.
+					if (attackAngle <= 90)
+						attackAngle += 90;
+					else if (attackAngle <= 180)
+						attackAngle -= 90;
+					else if (attackAngle <= 270)
+						attackAngle += 90;
+					else if (attackAngle <= 360)
+						attackAngle -= 90;
+
+					attackAngleInRads = attackAngle / Mathf.Rad2Deg;
+				}
+
 			}
-			else if (groundContactAction == GroundContactAction.BOUNCE)
-			{
-
-				//	we need to change the attack angle by +- 270 so that the enemy bouncys off the ground/platforms in the same 
-				//	direction (left/right), but at 90 degrees	to how it came into the wall.
-				//	we then need to change the new angle to radians so the Mathf.Sin() function works in the FixedUpdate() method.
-				if (attackAngle <= 90)
-					attackAngle += 90;
-				else if (attackAngle <= 180)
-					attackAngle -= 90;
-				else if (attackAngle <= 270)
-					attackAngle += 90;
-				else if (attackAngle <= 360)
-					attackAngle -= 90;
-
-				// Debug.Log("attackAngle:" + attackAngle);
-
-				// if (attackAngle <= 90)
-				// 	attackAngle += 270;
-				// else
-				// 	attackAngle -= 270;
-
-				attackAngleInRads = attackAngle / Mathf.Rad2Deg;
-			}
-
 		}
 
 		if (collider.tag == "Player")
 		{
+			if (!dying)
+			{
 
-			//	if we've killed the player and we're in the respawn bubble then reduce the
-			//	count by 1 as we're just about to explode.....
-			if (inTheRespawnBubble) GameMaster.EnemiesInRespawnBubble--;
+				//	if we've killed the player and we're in the respawn bubble then reduce the
+				//	count by 1 as we're just about to explode.....
+				if (inTheRespawnBubble) GameMaster.EnemiesInRespawnBubble--;
 
-			//  and kill me
-			dying = true;
-			anim.SetBool("KillMe", true);
-			Destroy(gameObject, 1.0f);
-
+				//  and kill me
+				dying = true;
+				anim.SetBool("KillMe", true);
+				Destroy(gameObject, 1.0f);
+			}
 		}
 
 		if (collider.CompareTag("Respawn"))

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+// using System;
 
 public class GameMaster : MonoBehaviour
 {
@@ -36,7 +37,9 @@ public class GameMaster : MonoBehaviour
 		set { _enemiesInRespawnBubble = value; }
 		get { return _enemiesInRespawnBubble; }
 	}
+	public int EnemiesInMyBubble;
 
+	private Color[] colors;
 
 	private void Awake()
 	{
@@ -57,6 +60,40 @@ public class GameMaster : MonoBehaviour
 			gmInstance = this;
 			DontDestroyOnLoad(this);
 		}
+
+		PopulateColorsArray();
+	}
+
+
+	private void Update()
+	{
+		EnemiesInMyBubble = _enemiesInRespawnBubble;
+	}
+
+
+
+	private void PopulateColorsArray()
+	{
+		colors = new Color[8];
+
+		colors[0] = Color.black;
+		colors[1] = Color.blue;
+		colors[2] = Color.red;
+		colors[3] = Color.magenta;
+		colors[4] = Color.green;
+		colors[5] = Color.cyan;
+		colors[6] = Color.yellow;
+		colors[7] = Color.white;
+	}
+
+	public static Color GetRandomColor()
+	{
+		return gmInstance._getRandomColor();
+	}
+
+	public Color _getRandomColor()
+	{
+		return colors[Random.Range(1, 8)];
 	}
 
 

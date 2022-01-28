@@ -6,10 +6,6 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
 
-	//  the information needed for the laser to fire from the correct place
-	public Transform firePoint;
-	public LineRenderer lineRenderer;
-
 	//  how quick the spaceman move from dsdie to side and how quickly he flies up
 	[SerializeField] private float moveForce;
 	[SerializeField] private float jumpForce;
@@ -31,15 +27,20 @@ public class Player : MonoBehaviour
 	private float delayBeforePlayerCanMove;               //  how long must the spaceman be facing the correct way before he can move
 	private float playerCanMoveCountdown;                 //  the countdown from when the spaceman last turned
 
-	public float laserDistance = 5f;                      //  how far the spaceman can shoot and hit something
-
 	public string pickedUpItemName;
 	public string nextAllowedPickUpItemName;
 
 	private bool playerIsDying;
 
 	private LevelController levelController;
-	private GameMaster gameMaster;
+
+	public GameObject bullet1;
+	public GameObject bullet2;
+	public GameObject bullet3;
+	public Transform bulletSpawnPoint;
+	public float laserDistance = 5f;                      //  how far the spaceman can shoot and hit something
+	float timeToFire = 0;                     //  time between bursts of fire for a multiple fire weapon
+	public float fireRate = 5;
 
 
 	private void Awake()
@@ -51,12 +52,6 @@ public class Player : MonoBehaviour
 
 	void Start()
 	{
-
-		gameMaster = GameMaster.gmInstance;
-		if (gameMaster == null)
-		{
-			Debug.LogError("No GameMaster found");
-		}
 
 		levelController = LevelController.lvInstance;
 		if (levelController == null)
@@ -88,6 +83,14 @@ public class Player : MonoBehaviour
 		moveHorizontal = Input.GetAxisRaw("Horizontal");
 		moveVertical = Input.GetAxisRaw("Vertical");
 
+		//  if it's a multiple fire weapon and the fire button is being HELD DOWN and the time is right for the next (or first) shot then shoot
+		if (Input.GetKey(KeyCode.Space) && Time.time > timeToFire)
+		{
+			//    update the timeToFire so we wait until it's time to fire before firing the next bullet.
+			timeToFire = Time.time + 1 / fireRate;
+			StartCoroutine(Shoot());
+		}
+
 		//  decremement the timer that allows the player to move after turning
 		playerCanMoveCountdown -= Time.deltaTime;
 	}
@@ -100,10 +103,7 @@ public class Player : MonoBehaviour
 		{
 			//  check whether we need to move the spaceman or make him shoot
 			AnimatePlayer();
-			if (Input.GetButtonDown("Fire1"))
-			{
-				StartCoroutine(PlayerShoot());
-			}
+
 		}
 	}
 
@@ -182,31 +182,23 @@ public class Player : MonoBehaviour
 
 	}
 
-
-
-	IEnumerator PlayerShoot()
+	IEnumerator Shoot()
 	{
 
-		RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, firePoint.right, laserDistance);
+		// Debug.Log("SHOOT");
+		GameObject b3 = Instantiate(bullet3);
 
-		if (hitInfo)
-		{
-			// Debug.Log("We hit something: " + hitInfo.transform.name);
-			lineRenderer.SetPosition(0, firePoint.position);
-			lineRenderer.SetPosition(1, hitInfo.point);
+		b3.transform.position = bulletSpawnPoint.transform.position;
+		b3.GetComponent<BulletBehaviour>().StartShoot(facingRight);
+		Destroy(b3, 2f);
 
-		}
-		else
-		{
-			lineRenderer.SetPosition(0, firePoint.position);
-			lineRenderer.SetPosition(1, firePoint.position + firePoint.right * laserDistance);
-		}
+		yield return new WaitForSeconds(0.1f);
+		GameObject b2 = Instantiate(bullet2);
+		b2.transform.position = bulletSpawnPoint.transform.position;
+		b2.GetComponent<BulletBehaviour>().StartShoot(facingRight);
+		Destroy(b2, 2f);
 
-		lineRenderer.enabled = true;
-		yield return new WaitForSeconds(0.02f);
-		lineRenderer.enabled = false;
 	}
-
 
 
 	//  if the box collider has hit something 

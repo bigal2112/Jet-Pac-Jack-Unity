@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3994216106931003871}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.67, y: -2.03, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -136,13 +136,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f87bb4d0dffd3bd49ad4456f3092fdba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackAngle: 21
   speed: 2
   waitBeforeAttack: 3
-  groundContactAction: 1
   mirrorImage: 0
-  reflectedVelocity: {x: 0, y: 0, z: 0}
-  contact: {x: 0, y: 0, z: 0}
+  groundContactAction: 1
+  scoreValue: 35
 --- !u!50 &-1449621269985428944
 Rigidbody2D:
   serializedVersion: 4
