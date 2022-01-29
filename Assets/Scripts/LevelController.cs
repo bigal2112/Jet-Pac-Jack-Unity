@@ -224,21 +224,15 @@ public class LevelController : MonoBehaviour
 	{
 		if (launching)
 		{
-
 			yield return new WaitForSeconds(0.9f);
-			rocketExhaust.GetComponent<SpriteRenderer>().color = Color.magenta;
 			rocketExhaust.SetActive(true);
-
 		}
 		else
 		{
-
-			rocketExhaust.GetComponent<SpriteRenderer>().color = Color.white;
 			rocketExhaust.SetActive(true);
 			yield return new WaitForSeconds(4.0f);
 
 			rocketExhaust.SetActive(false);
-
 		}
 
 

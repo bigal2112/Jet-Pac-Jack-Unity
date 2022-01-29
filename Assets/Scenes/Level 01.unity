@@ -7125,6 +7125,7 @@ MonoBehaviour:
   spaceman: {fileID: 6691947510385749004, guid: c8a340a89dafc0e419e3de4df72ea01f, type: 3}
   player1ScoreText: {fileID: 661550314}
   player1Lives: {fileID: 1585585019}
+  hiScoreText: {fileID: 437353858}
   EnemiesInMyBubble: 0
 --- !u!212 &1826766076
 SpriteRenderer:
@@ -8499,7 +8500,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 803541106, guid: 198b603d608ade14a8ad5d32c7bfa342, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
