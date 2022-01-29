@@ -31,6 +31,7 @@ public class GameMaster : MonoBehaviour
 
 	public TextMeshProUGUI player1ScoreText;                                //  player 1's score
 	public TextMeshProUGUI player1Lives;                                    //  player 1's lives
+	public TextMeshProUGUI hiScoreText;                                    //  The HiScore lives
 
 	private static int _enemiesInRespawnBubble = 0;
 	public static int EnemiesInRespawnBubble
@@ -39,6 +40,8 @@ public class GameMaster : MonoBehaviour
 		get { return _enemiesInRespawnBubble; }
 	}
 	public int EnemiesInMyBubble;
+	private int hiScore;
+
 
 	private Color[] colors;
 
@@ -70,7 +73,12 @@ public class GameMaster : MonoBehaviour
 			Debug.LogError("FATAL ERROR: Ensure the Canvas object is the first child of the GameMaster and the GameOverUI is the first child of the Canvas !!!");
 		}
 
-		InitialisePlayer1ScoreAndLives();
+		//	get the hi score from PlayerPref and update the UI
+		hiScore = PlayerPrefs.GetInt("HiScore");
+		hiScoreText.text = hiScore.ToString("000000");
+
+		//	initialise the players scores and lives.
+		InitialiseScoresAndLives();
 	}
 
 
@@ -112,14 +120,15 @@ public class GameMaster : MonoBehaviour
 	//  
 	//  A global method to add an amount to the score of player 1
 	//
-	public static void InitialisePlayer1ScoreAndLives()
+	public static void InitialiseScoresAndLives()
 	{
-		gmInstance._initialisePlayer1ScoreAndLives();
+		gmInstance._initialiseScoresAndLives();
 	}
 
 	//  internal method that actually adds the amount to player 1's score
-	private void _initialisePlayer1ScoreAndLives()
+	private void _initialiseScoresAndLives()
 	{
+
 		Player1Score = 0;
 		player1ScoreText.text = _player1Score.ToString("000000");
 
@@ -158,6 +167,15 @@ public class GameMaster : MonoBehaviour
 		if (_remainingLives == 0)
 		{
 			//	GAME OVER
+
+			//	if the player has beat the hi score then update the PlayerPref and the UI.
+			if (Player1Score > hiScore)
+			{
+				hiScore = Player1Score;
+				PlayerPrefs.SetInt("HiScore", Player1Score);
+			}
+			hiScoreText.text = hiScore.ToString("000000");
+
 			gameOverUI.SetActive(true);
 		}
 		else

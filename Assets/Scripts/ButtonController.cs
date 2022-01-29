@@ -5,7 +5,7 @@ public class ButtonController : MonoBehaviour
 {
 	public void RestartGame()
 	{
-		GameMaster.InitialisePlayer1ScoreAndLives();
+		GameMaster.InitialiseScoresAndLives();
 		SceneManager.LoadScene(0);
 	}
 
