@@ -9,16 +9,17 @@ public class GameMaster : MonoBehaviour
 {
 
 	public static GameMaster gmInstance;
+	[SerializeField] private GameObject gameOverUI;
 
 	//  internal remaining lives parameter and externally accessible getter
-	private static int _remainingLives = 3;
+	private static int _remainingLives;
 	public static int RemainingLives
 	{
 		set { _remainingLives = value; }
 		get { return _remainingLives; }
 	}
 
-	private static int _player1Score = 0;
+	private static int _player1Score;
 	public static int Player1Score
 	{
 		set { _player1Score = value; }
@@ -62,7 +63,16 @@ public class GameMaster : MonoBehaviour
 		}
 
 		PopulateColorsArray();
+
+		//	make sure we have the correct ordering in the GameMaster object
+		if (transform.GetChild(0).GetChild(0).name != "GameOverUI")
+		{
+			Debug.LogError("FATAL ERROR: Ensure the Canvas object is the first child of the GameMaster and the GameOverUI is the first child of the Canvas !!!");
+		}
+
+		InitialisePlayer1ScoreAndLives();
 	}
+
 
 
 	private void Update()
@@ -97,6 +107,27 @@ public class GameMaster : MonoBehaviour
 	}
 
 
+	//  I  n  i  t  i  a  l  i  s  e  P  l  a  y  e  r  1  S  c  o  r  e  A  n  d  L  i  v  e  s
+	//  ---------------------------------------------------------------------------------------------------
+	//  
+	//  A global method to add an amount to the score of player 1
+	//
+	public static void InitialisePlayer1ScoreAndLives()
+	{
+		gmInstance._initialisePlayer1ScoreAndLives();
+	}
+
+	//  internal method that actually adds the amount to player 1's score
+	private void _initialisePlayer1ScoreAndLives()
+	{
+		Player1Score = 0;
+		player1ScoreText.text = _player1Score.ToString("000000");
+
+		RemainingLives = 3;
+		player1Lives.text = _remainingLives.ToString();
+
+	}
+
 	//  I  n  c  r  e  m  e  n  t  P  l  a  y  e  r  1  S  c  o  r  e
 	//  ---------------------------------------------------------------------------------------------------
 	//  
@@ -127,7 +158,7 @@ public class GameMaster : MonoBehaviour
 		if (_remainingLives == 0)
 		{
 			//	GAME OVER
-			Debug.Log("GAME OVERRRRRRRRR");
+			gameOverUI.SetActive(true);
 		}
 		else
 		{

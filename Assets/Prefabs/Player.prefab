@@ -296,9 +296,9 @@ MonoBehaviour:
   jumpForce: 0.3
   pickedUpItemName: 
   nextAllowedPickUpItemName: 
-  bullet1: {fileID: 0}
+  bullet1: {fileID: 5103272789700907937, guid: 4d88efaf717e33c41a777ecb881ddd1a, type: 3}
   bullet2: {fileID: 6037093351837219377, guid: cc0d8882068eca84da782116eae54a5c, type: 3}
-  bullet3: {fileID: 5103272789700907937, guid: 4d88efaf717e33c41a777ecb881ddd1a, type: 3}
+  bullet3: {fileID: 2153584312278539030, guid: 81a2e8d5b3da44f4297b4a6d3305f6ec, type: 3}
   bulletSpawnPoint: {fileID: 7356892088348569074}
   laserDistance: 5
   fireRate: 5

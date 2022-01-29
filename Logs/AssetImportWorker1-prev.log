@@ -391,3 +391,21 @@ AssetImportParameters requested are different than current active one (requested
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 3891.571420 seconds.
+  path: Assets/Sprites/EnemiesMoreSheet.png
+  artifactKey: Guid(c803b4cfb01cf224bae23074c6d0375c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/EnemiesMoreSheet.png using Guid(c803b4cfb01cf224bae23074c6d0375c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '091d3e59dfbad528c11410b3b3aaa72a') in 0.121295 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 8.933272 seconds.
+  path: Assets/Sprites/EnemiesMoreSheet.png
+  artifactKey: Guid(c803b4cfb01cf224bae23074c6d0375c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/EnemiesMoreSheet.png using Guid(c803b4cfb01cf224bae23074c6d0375c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '26fe485bffa87b658ff0888e4441277e') in 0.017580 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 36.336634 seconds.
+  path: Assets/Sprites/EnemiesMoreSheet.png
+  artifactKey: Guid(c803b4cfb01cf224bae23074c6d0375c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/EnemiesMoreSheet.png using Guid(c803b4cfb01cf224bae23074c6d0375c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '77072ffa92d709b5be9b4b8a045be8fa') in 0.050841 seconds 

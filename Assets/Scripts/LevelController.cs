@@ -9,14 +9,14 @@ public class LevelController : MonoBehaviour
 	public static LevelController lvInstance;
 
 	//  internal spaceshipBuilt parameter and externally accessible getter
-	private static bool _spaceshipBuilt = false;
+	private static bool _spaceshipBuilt;
 	public static bool SpaceshipBuilt
 	{
 		set { _spaceshipBuilt = value; }
 		get { return _spaceshipBuilt; }
 	}
 
-	private static string _nextSpaceshipPart = "SpaceshipPart2";
+	private static string _nextSpaceshipPart;
 	public static string NextSpaceshipPart
 	{
 		set { _nextSpaceshipPart = value; }
@@ -24,21 +24,20 @@ public class LevelController : MonoBehaviour
 	}
 	public string theNextPart;
 
-	private static bool _spacesmanInside = false;
+	private static bool _spacesmanInside;
 	public static bool SpacemanInside
 	{
 		set { _spacesmanInside = value; }
 		get { return _spacesmanInside; }
 	}
 
-	private static bool _fuelCellActive = false;
+	private static bool _fuelCellActive;
 	public static bool FuelCellActive
 	{
 		set { _fuelCellActive = value; }
 		get { return _fuelCellActive; }
 	}
 
-	public Transform playerSpawnPoint;
 	public Transform fuelCell;
 	public Transform[] spawnPoints;
 	public Transform[] spaceshipParts;
@@ -64,7 +63,7 @@ public class LevelController : MonoBehaviour
 
 	private int currentLevelLoop;
 	private int maxLevelLoops = 3;
-	private bool readyForNextLevel = false;
+	private bool readyForNextLevel;
 	private bool newLoopStarted;
 
 	public int enemyWaveFrom;
@@ -92,7 +91,7 @@ public class LevelController : MonoBehaviour
 		if (spaceshipAnim == null)
 			Debug.LogError("You need to put the spaceship on the LevelController");
 
-		readyForNextLevel = true;
+		readyForNextLevel = false;
 		currentLevelLoop = 1;
 
 		//	set the enemy waves allowed for this level loop.
@@ -103,9 +102,13 @@ public class LevelController : MonoBehaviour
 		newLoopStarted = true;
 
 		//  initialise properties
+		FuelCellActive = false;
 		fuelCellsNeeded = 1;
 		fuelCellsDropped = 0;
 
+		SpaceshipBuilt = false;
+		SpacemanInside = false;
+		NextSpaceshipPart = "SpaceshipPart2";
 
 
 		collectablesCounter = 0;
@@ -113,6 +116,8 @@ public class LevelController : MonoBehaviour
 
 		StartCoroutine(DropCollectable(newLoopStarted));
 		newLoopStarted = false;
+
+		GameMaster.gmInstance.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
 	}
 
 	//  U  P  D  A  T  E
