@@ -16,6 +16,7 @@ public class EnemyBehaviour1 : MonoBehaviour
 
 	private Animator anim;
 	private Rigidbody2D rb;
+	private AudioSource noise;
 
 	private bool dying = false;
 	private float yValue;
@@ -28,6 +29,10 @@ public class EnemyBehaviour1 : MonoBehaviour
 		rb = GetComponent<Rigidbody2D>();
 		anim = GetComponent<Animator>();
 		GetComponent<SpriteRenderer>().color = GameMaster.GetRandomColor();
+
+		noise = GetComponent<AudioSource>();
+		if (noise == null)
+			Debug.Log("There is no AudioSource component attached to " + gameObject.name);
 
 		inTheRespawnBubble = false;
 
@@ -83,6 +88,7 @@ public class EnemyBehaviour1 : MonoBehaviour
 
 					dying = true;
 					anim.SetBool("KillMe", true);
+					noise.Play();
 					Destroy(gameObject, 1.0f);
 				}
 				else if (groundContactAction == GroundContactAction.BOUNCE)
@@ -106,6 +112,7 @@ public class EnemyBehaviour1 : MonoBehaviour
 
 				dying = true;
 				anim.SetBool("KillMe", true);
+				noise.Play();
 				Destroy(gameObject, 1.0f);
 				GameMaster.IncrementPlayer1Score(scoreValue);
 			}
@@ -123,6 +130,7 @@ public class EnemyBehaviour1 : MonoBehaviour
 				//  and kill me
 				dying = true;
 				anim.SetBool("KillMe", true);
+				noise.Play();
 				Destroy(gameObject, 1.0f);
 			}
 		}

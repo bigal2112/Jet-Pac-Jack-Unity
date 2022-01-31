@@ -42,6 +42,9 @@ public class Player : MonoBehaviour
 	float timeToFire = 0;                     //  time between bursts of fire for a multiple fire weapon
 	public float fireRate = 5;
 
+	public Vector2 bulletStartPoint;
+	public Vector2 bulletActualStartPoint;
+
 
 	private void Awake()
 	{
@@ -93,6 +96,8 @@ public class Player : MonoBehaviour
 
 		//  decremement the timer that allows the player to move after turning
 		playerCanMoveCountdown -= Time.deltaTime;
+
+		bulletStartPoint = bulletSpawnPoint.transform.position;
 	}
 
 
@@ -189,12 +194,14 @@ public class Player : MonoBehaviour
 		GameObject b3 = Instantiate(bullet3);
 
 		b3.transform.position = bulletSpawnPoint.transform.position;
+		bulletActualStartPoint = bulletSpawnPoint.transform.position;
 		b3.GetComponent<BulletBehaviour>().StartShoot(facingRight);
 		Destroy(b3, 2f);
 
 		yield return new WaitForSeconds(0.1f);
 		GameObject b2 = Instantiate(bullet2);
 		b2.transform.position = bulletSpawnPoint.transform.position;
+		bulletActualStartPoint = bulletSpawnPoint.transform.position;
 		b2.GetComponent<BulletBehaviour>().StartShoot(facingRight);
 		Destroy(b2, 2f);
 

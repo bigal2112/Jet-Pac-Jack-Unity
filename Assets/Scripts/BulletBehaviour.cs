@@ -8,7 +8,11 @@ public class BulletBehaviour : MonoBehaviour
 
 	public void StartShoot(bool facingRight)
 	{
-		if (!facingRight) speed *= -1;
+		if (!facingRight)
+			speed *= -1;
+		else
+			transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+
 		GetComponent<Rigidbody2D>().velocity = new Vector2(speed, 0);
 	}
 

@@ -15,6 +15,7 @@ public class EnemyBehaviour : MonoBehaviour
 
 	private Animator anim;
 	private Rigidbody2D rb;
+	private AudioSource noise;
 	private int direction = -1;
 
 	private bool dying = false;
@@ -41,6 +42,10 @@ public class EnemyBehaviour : MonoBehaviour
 		rb = GetComponent<Rigidbody2D>();
 		anim = GetComponent<Animator>();
 		GetComponent<SpriteRenderer>().color = GameMaster.GetRandomColor();
+
+		noise = GetComponent<AudioSource>();
+		if (noise == null)
+			Debug.Log("There is no AudioSource component attached to " + gameObject.name);
 
 		Destroy(gameObject, 10.0f);
 
@@ -71,6 +76,7 @@ public class EnemyBehaviour : MonoBehaviour
 
 					dying = true;
 					anim.SetBool("KillMe", true);
+					noise.Play();
 					Destroy(gameObject, 1.0f);
 
 					if (collider.CompareTag("Bullet"))
@@ -109,6 +115,7 @@ public class EnemyBehaviour : MonoBehaviour
 				//  and kill me
 				dying = true;
 				anim.SetBool("KillMe", true);
+				noise.Play();
 				Destroy(gameObject, 1.0f);
 			}
 		}
