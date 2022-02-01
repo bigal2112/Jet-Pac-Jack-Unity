@@ -213,10 +213,7 @@ public class LevelController : MonoBehaviour
 				//  as the spaceship is landing we can start the countdown to spawn the spaceman
 				GameMaster.SpawnSpaceman(7.6f);
 
-				SetEnemiesForNextLoop();
-
-				//	start the enemy spawner.
-				enemyWaveSpawnerScript.enabled = true;
+				StartCoroutine(SetEnemiesForNextLoop());
 
 				//  initialise a few things
 				newLoopStarted = true;
@@ -371,8 +368,11 @@ public class LevelController : MonoBehaviour
 
 	}
 
-	private void SetEnemiesForNextLoop()
+	IEnumerator SetEnemiesForNextLoop()
 	{
+
+		yield return new WaitForSeconds(4.0f);
+
 		switch (currentLevelLoop)
 		{
 			case 2:
@@ -387,6 +387,10 @@ public class LevelController : MonoBehaviour
 				Debug.LogError("No currentLevelLoop value present");
 				break;
 		}
+
+		//	enable the scrips so the enemies start spawning
+		enemyWaveSpawnerScript.enabled = true;
+
 	}
 
 
