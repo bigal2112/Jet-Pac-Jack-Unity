@@ -17,12 +17,16 @@ public class FuelCellsBehaviour : MonoBehaviour
 	private Rigidbody2D rb;
 	public float speed = 2.0f;
 	public float dropzoneX = 4.0f;
+	public AudioClip pickupSound;
+	public AudioClip dockingSound;
+	public AudioSource audioSource;
 
 
 	private void Start()
 	{
 		state = ObjectState.FALLING;
 		rb = GetComponent<Rigidbody2D>();
+		audioSource.GetComponent<AudioSource>();
 	}
 
 
@@ -64,7 +68,8 @@ public class FuelCellsBehaviour : MonoBehaviour
 			if (transform.position.x == dropzoneX)
 			{
 				LevelController.FuelCellLanded();
-				Destroy(gameObject);
+				audioSource.PlayOneShot(dockingSound, 1);
+				Destroy(gameObject, 0.5f);
 			}
 			else
 			{
@@ -85,6 +90,7 @@ public class FuelCellsBehaviour : MonoBehaviour
 			gameObject.transform.parent = player;
 			gameObject.transform.position = player.position;
 			state = ObjectState.IN_TRANSIT;
+			audioSource.PlayOneShot(pickupSound, 1);
 		}
 
 

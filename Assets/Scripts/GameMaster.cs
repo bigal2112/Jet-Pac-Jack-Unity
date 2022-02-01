@@ -135,6 +135,8 @@ public class GameMaster : MonoBehaviour
 		RemainingLives = 3;
 		player1Lives.text = _remainingLives.ToString();
 
+		//  spawn the spaceman
+		SpawnSpaceman(0.1f);
 	}
 
 	//  I  n  c  r  e  m  e  n  t  P  l  a  y  e  r  1  S  c  o  r  e
@@ -183,7 +185,7 @@ public class GameMaster : MonoBehaviour
 			_remainingLives--;
 
 			player1Lives.text = _remainingLives.ToString();
-			SpawnSpaceman();
+			SpawnSpaceman(5.5f);
 		}
 	}
 
@@ -195,23 +197,23 @@ public class GameMaster : MonoBehaviour
 	//	_spawnSpaceman() which in turn starts the co-routine StartSpawningTheSpaceman() which does the actual
 	//	work.
 	//
-	public static void SpawnSpaceman()
+	public static void SpawnSpaceman(float delayBeforeSpawning)
 	{
-		gmInstance._spawnSpaceman();
+		gmInstance._spawnSpaceman(delayBeforeSpawning);
 	}
 
-	private void _spawnSpaceman()
+	private void _spawnSpaceman(float delayBeforeSpawning)
 	{
-		StartCoroutine(StartSpawningTheSpaceman());
+		StartCoroutine(StartSpawningTheSpaceman(delayBeforeSpawning));
 	}
 
 
 
-	IEnumerator StartSpawningTheSpaceman()
+	IEnumerator StartSpawningTheSpaceman(float delayBeforeSpawning)
 	{
 
 		//	wait for another little bit then respawn player.
-		yield return new WaitForSeconds(5.5f);
+		yield return new WaitForSeconds(delayBeforeSpawning);
 
 		//	this will wait until there are no enemies in the respawn bubble before respawing the player.
 		while (true)

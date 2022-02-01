@@ -48,7 +48,7 @@ public class LevelController : MonoBehaviour
 
 	public Transform spaceship;
 	public GameObject liftOffEntrance;
-	public GameObject spaceman;
+	// public GameObject spaceman;
 
 	private int fuelCellsNeeded;
 	private int fuelCellsDropped;
@@ -113,6 +113,9 @@ public class LevelController : MonoBehaviour
 
 		collectablesCounter = 0;
 		spawningCollectable = false;
+
+
+
 
 		StartCoroutine(DropCollectable(newLoopStarted));
 		newLoopStarted = false;
@@ -200,7 +203,7 @@ public class LevelController : MonoBehaviour
 				StartCoroutine(ControlRocketBurn(false));
 
 				//  as the spaceship is landing we can start the countdown to spawn the spaceman
-				GameMaster.SpawnSpaceman();
+				GameMaster.SpawnSpaceman(5.5f);
 
 				SetEnemiesForNextLoop();
 
