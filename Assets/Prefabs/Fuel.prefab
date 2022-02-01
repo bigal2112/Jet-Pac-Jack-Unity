@@ -151,7 +151,7 @@ MonoBehaviour:
   speed: 2
   dropzoneX: 4
   pickupSound: {fileID: 8300000, guid: 5c206427c3558574c9c246383ae2abdd, type: 3}
-  dockingSound: {fileID: 8300000, guid: c19d43a4628d7634aa757bf42d4ddc36, type: 3}
+  dockingSound: {fileID: 8300000, guid: 8bec4e22565353241984a8db12c5cda7, type: 3}
   audioSource: {fileID: 5785446214052189592}
 --- !u!82 &5785446214052189592
 AudioSource:

@@ -6,6 +6,9 @@ public class CollectablesBehaviour : MonoBehaviour
 {
 
 	public enum ObjectState { FALLING, WAITING, COLLECTED };
+
+	private AudioSource pickupNoise;
+
 	public ObjectState state;
 	public bool flashing;
 	private Rigidbody2D rb;
@@ -39,6 +42,10 @@ public class CollectablesBehaviour : MonoBehaviour
 		colorCounter = 0;
 
 		flashCounter = flashRate;
+
+		pickupNoise = GetComponent<AudioSource>();
+		if (pickupNoise == null)
+			Debug.Log("There is no AudioSource component attached to " + gameObject.name);
 	}
 
 	private void FixedUpdate()
@@ -84,9 +91,10 @@ public class CollectablesBehaviour : MonoBehaviour
 			// Debug.Log("Player scored " + scoreValue + " points");
 			GameMaster.IncrementPlayer1Score(scoreValue);
 			LevelController.DecrementCollectablesCounter();
+			pickupNoise.Play();
 
 			//  and remove us from the scene
-			Destroy(gameObject);
+			Destroy(gameObject, 0.1f);
 
 		}
 
