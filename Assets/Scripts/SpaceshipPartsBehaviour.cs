@@ -19,11 +19,16 @@ public class SpaceshipPartsBehaviour : MonoBehaviour
 	public float dropzoneX = 4.0f;
 	private Transform parent;
 
+	public AudioClip pickupSound;
+	public AudioClip dockingSound;
+	public AudioSource audioSource;
+
 
 	private void Start()
 	{
 		state = ObjectState.WAITING;
 		rb = GetComponent<Rigidbody2D>();
+		audioSource.GetComponent<AudioSource>();
 	}
 
 
@@ -85,6 +90,7 @@ public class SpaceshipPartsBehaviour : MonoBehaviour
 				Transform player = collider.gameObject.transform;
 				gameObject.transform.parent = player;
 				gameObject.transform.position = player.position;
+				audioSource.PlayOneShot(pickupSound, 1);
 				state = ObjectState.IN_TRANSIT;
 			}
 		}
@@ -114,12 +120,14 @@ public class SpaceshipPartsBehaviour : MonoBehaviour
 		{
 			// Debug.Log(gameObject.tag + " docked successfully");
 			state = ObjectState.DOCKED;
+			audioSource.PlayOneShot(dockingSound, 1);
 			LevelController.NextSpaceshipPart = "SpaceshipPart1";
 		}
 		else if (gameObject.tag == "SpaceshipPart1" && collider.tag == "SpaceshipPart2" && state == ObjectState.DROPPING)
 		{
 			// Debug.Log(gameObject.tag + " docked successfully");
 			state = ObjectState.DOCKED;
+			audioSource.PlayOneShot(dockingSound, 1);
 			LevelController.NextSpaceshipPart = null;
 			LevelController.SpaceshipBuilt = true;
 		}

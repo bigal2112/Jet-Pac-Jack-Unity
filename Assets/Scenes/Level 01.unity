@@ -8612,10 +8612,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1628440953}
     m_Modifications:
-    - target: {fileID: 116348037439322793, guid: 7bd3337baf41066428094f7ac0775a9c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.26
-      objectReference: {fileID: 0}
     - target: {fileID: 1745882605073627863, guid: 7bd3337baf41066428094f7ac0775a9c, type: 3}
       propertyPath: m_Name
       value: SpaceshipMiddle
@@ -8773,10 +8769,6 @@ PrefabInstance:
     - target: {fileID: 1460647465125311766, guid: 0691cb18c224dd04a84a5b19d9fc308d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6818335486849814765, guid: 0691cb18c224dd04a84a5b19d9fc308d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.29
       objectReference: {fileID: 0}
     - target: {fileID: 7382950880678390199, guid: 0691cb18c224dd04a84a5b19d9fc308d, type: 3}
       propertyPath: m_Name
