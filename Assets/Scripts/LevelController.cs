@@ -69,6 +69,10 @@ public class LevelController : MonoBehaviour
 	public int enemyWaveFrom;
 	public int enemyWaveTo;
 
+	public AudioClip launchSound;
+	public AudioClip landSound;
+	public AudioSource audioSource;
+
 
 	private void Awake()
 	{
@@ -90,6 +94,9 @@ public class LevelController : MonoBehaviour
 		spaceshipAnim = spaceship.GetComponent<Animator>();
 		if (spaceshipAnim == null)
 			Debug.LogError("You need to put the spaceship on the LevelController");
+
+		audioSource.GetComponent<AudioSource>();
+
 
 		readyForNextLevel = false;
 		currentLevelLoop = 1;
@@ -200,10 +207,11 @@ public class LevelController : MonoBehaviour
 				//  now play the landing spaceship animation
 				spaceshipAnim.SetBool("LaunchSpaceship", false);
 				spaceshipAnim.SetBool("LandSpaceship", true);
+				audioSource.PlayOneShot(landSound, 1);
 				StartCoroutine(ControlRocketBurn(false));
 
 				//  as the spaceship is landing we can start the countdown to spawn the spaceman
-				GameMaster.SpawnSpaceman(5.5f);
+				GameMaster.SpawnSpaceman(7.6f);
 
 				SetEnemiesForNextLoop();
 
@@ -227,13 +235,13 @@ public class LevelController : MonoBehaviour
 	{
 		if (launching)
 		{
-			yield return new WaitForSeconds(0.9f);
+			yield return new WaitForSeconds(2.9f);
 			rocketExhaust.SetActive(true);
 		}
 		else
 		{
 			rocketExhaust.SetActive(true);
-			yield return new WaitForSeconds(4.0f);
+			yield return new WaitForSeconds(5.3f);
 
 			rocketExhaust.SetActive(false);
 		}
@@ -350,12 +358,12 @@ public class LevelController : MonoBehaviour
 		//  launch the spaceship
 		spaceshipAnim.SetBool("LandSpaceship", false);
 		spaceshipAnim.SetBool("LaunchSpaceship", true);
-
+		audioSource.PlayOneShot(launchSound, 1);
 		StartCoroutine(ControlRocketBurn(true));
 
 
-		//  wait for 5 seconds then go onto the next level
-		yield return new WaitForSeconds(5.0f);
+		//  wait for 9.7 seconds then go onto the next level
+		yield return new WaitForSeconds(9.7f);
 		currentLevelLoop++;
 		readyForNextLevel = true;
 
@@ -400,43 +408,5 @@ public class LevelController : MonoBehaviour
 
 		collectablesCounter = 0;
 	}
-
-
-	// IEnumerator SpawnSpaceman()
-	// {
-
-	// 	//	wait for another little bit then respawn player.
-	// 	yield return new WaitForSeconds(5.5f);
-
-	// 	Debug.Log("Spawning in LevelController");
-	// 	//  TODO: only spawn the player if there are no enemies nearby. Try using raycast to see what's happening around you.
-	// 	//  SPAWN THE PLAYER AS HE'S BEEN DESTROYED AT THE END OF THE PREVIOUS LOOP
-	// 	if (NoPlayersInScene())
-	// 		Instantiate(spaceman, playerSpawnPoint.transform.position, Quaternion.identity);
-
-
-
-	// }
-
-
-	// private bool NoPlayersInScene()
-	// {
-
-	// 	//  go through all the game object and if any of them are collectables destroy them
-	// 	List<GameObject> rootObjects = new List<GameObject>();
-	// 	Scene scene = SceneManager.GetActiveScene();
-	// 	scene.GetRootGameObjects(rootObjects);
-	// 	bool noPlayersInScene = true;
-
-	// 	// iterate root objects and do something
-	// 	for (int i = 0; i < rootObjects.Count; i++)
-	// 	{
-	// 		GameObject gameObject = rootObjects[i];
-	// 		if (gameObject.CompareTag("Player"))
-	// 			noPlayersInScene = false;
-	// 	}
-
-	// 	return noPlayersInScene;
-	// }
 
 }
