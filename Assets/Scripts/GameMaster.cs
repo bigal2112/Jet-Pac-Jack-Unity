@@ -218,7 +218,7 @@ public class GameMaster : MonoBehaviour
 		//	this will wait until there are no enemies in the respawn bubble before respawing the player.
 		while (true)
 		{
-			if (_enemiesInRespawnBubble == 0)
+			if (_enemiesInRespawnBubble <= 0)
 				break;
 
 			yield return new WaitForSeconds(0.1f);

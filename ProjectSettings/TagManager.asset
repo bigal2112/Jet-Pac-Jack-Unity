@@ -20,6 +20,7 @@ TagManager:
   - Collectable
   - Ceiling
   - Bullet
+  - Edge
   layers:
   - Default
   - TransparentFX

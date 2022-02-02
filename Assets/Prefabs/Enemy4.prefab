@@ -163,6 +163,7 @@ MonoBehaviour:
   mirrorImage: 0
   groundContactAction: 1
   scoreValue: 35
+  explosion: {fileID: 8023219112110762524, guid: ab22982e0cb59364aa7c51290d557c9c, type: 3}
 --- !u!82 &-4589798160096265392
 AudioSource:
   m_ObjectHideFlags: 0

@@ -22,6 +22,8 @@ public class EnemyBehaviour1 : MonoBehaviour
 	private float yValue;
 	private bool inTheRespawnBubble;
 
+	public GameObject explosion;
+
 	void Start()
 	{
 
@@ -76,7 +78,7 @@ public class EnemyBehaviour1 : MonoBehaviour
 	{
 		if (!dying)
 		{
-			if (collider.CompareTag("Ground") || collider.CompareTag("Ceiling"))
+			if (collider.CompareTag("Ground") || collider.CompareTag("Ceiling") || collider.CompareTag("Edge"))
 			{
 				// Debug.Log("Hit the " + collider.name + " - " + groundContactAction);
 
@@ -87,15 +89,25 @@ public class EnemyBehaviour1 : MonoBehaviour
 					if (inTheRespawnBubble) GameMaster.EnemiesInRespawnBubble--;
 
 					dying = true;
-					anim.SetBool("KillMe", true);
+
+					//anim.SetBool("KillMe", true);
+					GameObject newExplosion = Instantiate(explosion, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
 					noise.Play();
-					Destroy(gameObject, 1.0f);
+					Destroy(gameObject);
+					Destroy(newExplosion, 1.0f);
 				}
 				else if (groundContactAction == GroundContactAction.BOUNCE)
 				{
 
-					// make us bounce off the collider by negating the y value of our velocity
-					rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * -1); ;
+					if (collider.CompareTag("Ground") || collider.CompareTag("Ceiling"))
+
+						// make us bounce off the collider by negating the y value of our velocity
+						rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * -1);
+					else
+						// make us bounce off the collider by negating the x value of our velocity
+						rb.velocity = new Vector2(rb.velocity.x * -1, rb.velocity.y); ;
+
+
 
 				}
 
@@ -106,14 +118,22 @@ public class EnemyBehaviour1 : MonoBehaviour
 		{
 			if (!dying)
 			{
-				//	if we've killed the player and we're in the respawn bubble then reduce the
-				//	count by 1 as we're just about to explode.....
-				if (inTheRespawnBubble) GameMaster.EnemiesInRespawnBubble--;
-
 				dying = true;
-				anim.SetBool("KillMe", true);
+
+				//	if we've been shot and we're in the respawn bubble then reduce the
+				//	count by 1 as we're just about to explode.....
+				// if (inTheRespawnBubble)
+				// {
+				// 	GameMaster.EnemiesInRespawnBubble--;
+				// 	Debug.Log("Bubble decrement");
+				// }
+
+
+				// anim.SetBool("KillMe", true);
+				GameObject newExplosion = Instantiate(explosion, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
 				noise.Play();
-				Destroy(gameObject, 1.0f);
+				Destroy(gameObject);
+				Destroy(newExplosion, 1.0f);
 				GameMaster.IncrementPlayer1Score(scoreValue);
 			}
 		}
@@ -123,15 +143,21 @@ public class EnemyBehaviour1 : MonoBehaviour
 		{
 			if (!dying)
 			{
+				dying = true;
+
 				//	if we've killed the player and we're in the respawn bubble then reduce the
 				//	count by 1 as we're just about to explode.....
-				if (inTheRespawnBubble) GameMaster.EnemiesInRespawnBubble--;
+				// if (inTheRespawnBubble)
+				// {
+				// 	GameMaster.EnemiesInRespawnBubble--;
+				// 	Debug.Log("Player decrement");
+				// }
 
-				//  and kill me
-				dying = true;
-				anim.SetBool("KillMe", true);
+				// anim.SetBool("KillMe", true);
+				GameObject newExplosion = Instantiate(explosion, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
 				noise.Play();
-				Destroy(gameObject, 1.0f);
+				Destroy(gameObject);
+				Destroy(newExplosion, 1.0f);
 			}
 		}
 
@@ -149,6 +175,7 @@ public class EnemyBehaviour1 : MonoBehaviour
 		{
 			inTheRespawnBubble = false;
 			GameMaster.EnemiesInRespawnBubble--;
+			// Debug.Log("Exit decrement");
 		}
 	}
 
