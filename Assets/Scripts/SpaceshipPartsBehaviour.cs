@@ -23,12 +23,16 @@ public class SpaceshipPartsBehaviour : MonoBehaviour
 	public AudioClip dockingSound;
 	public AudioSource audioSource;
 
+	private bool alreadyBeenPickedUpOnce;
+
 
 	private void Start()
 	{
 		state = ObjectState.WAITING;
 		rb = GetComponent<Rigidbody2D>();
 		audioSource.GetComponent<AudioSource>();
+
+		alreadyBeenPickedUpOnce = false;
 	}
 
 
@@ -92,6 +96,11 @@ public class SpaceshipPartsBehaviour : MonoBehaviour
 				gameObject.transform.position = player.position;
 				audioSource.PlayOneShot(pickupSound, 1);
 				state = ObjectState.IN_TRANSIT;
+
+				if (!alreadyBeenPickedUpOnce)
+					GameMaster.IncrementPlayer1Score(100);
+
+				alreadyBeenPickedUpOnce = true;
 			}
 		}
 

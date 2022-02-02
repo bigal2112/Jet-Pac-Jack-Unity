@@ -122,11 +122,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  waitBeforeAttack: 3
+  waitBeforeAttack: 0
   mirrorImage: 0
   groundContactAction: 1
-  scoreValue: 45
+  scoreValue: 40
   explosion: {fileID: 8023219112110762524, guid: ab22982e0cb59364aa7c51290d557c9c, type: 3}
+  timeBeforeDirectionChange: 0
+  directionChangeDelayLowerLimit: 1
+  directionChangeDelayUpperLimit: 5
+  currentYDirection: 0
 --- !u!50 &963859502
 Rigidbody2D:
   serializedVersion: 4

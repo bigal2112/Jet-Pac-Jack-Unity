@@ -123,7 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   flashing: 0
-  scoreValue: 25
+  scoreValue: 250
   speed: 2
   flashRate: 100
   flashCounter: 0

@@ -142,7 +142,7 @@ MonoBehaviour:
   waitBeforeAttack: 3
   mirrorImage: 0
   groundContactAction: 1
-  scoreValue: 35
+  scoreValue: 80
   explosion: {fileID: 8023219112110762524, guid: ab22982e0cb59364aa7c51290d557c9c, type: 3}
 --- !u!50 &-1449621269985428944
 Rigidbody2D:

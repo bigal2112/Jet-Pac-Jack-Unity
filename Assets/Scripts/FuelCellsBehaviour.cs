@@ -20,6 +20,7 @@ public class FuelCellsBehaviour : MonoBehaviour
 	public AudioClip pickupSound;
 	public AudioClip dockingSound;
 	public AudioSource audioSource;
+	private bool alreadyBeenPickedUpOnce;
 
 
 	private void Start()
@@ -27,6 +28,7 @@ public class FuelCellsBehaviour : MonoBehaviour
 		state = ObjectState.FALLING;
 		rb = GetComponent<Rigidbody2D>();
 		audioSource.GetComponent<AudioSource>();
+		alreadyBeenPickedUpOnce = false;
 	}
 
 
@@ -91,6 +93,11 @@ public class FuelCellsBehaviour : MonoBehaviour
 			gameObject.transform.position = player.position;
 			state = ObjectState.IN_TRANSIT;
 			audioSource.PlayOneShot(pickupSound, 1);
+
+			if (!alreadyBeenPickedUpOnce)
+				GameMaster.IncrementPlayer1Score(100);
+
+			alreadyBeenPickedUpOnce = true;
 		}
 
 
