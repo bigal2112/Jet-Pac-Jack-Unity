@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class EnemyBehaviour1 : MonoBehaviour
+public class EnemyBehaviour2 : MonoBehaviour
 {
-
 	public enum GroundContactAction { EXPLODE, BOUNCE }
 
 	public float speed = 2f;
 	public int waitBeforeAttack = 3;
 	public bool mirrorImage;
-	public GroundContactAction groundContactAction = GroundContactAction.EXPLODE;
-	public int scoreValue = 35;
+	public GroundContactAction groundContactAction = GroundContactAction.BOUNCE;
+	public int scoreValue = 45;
 
 	private Animator anim;
 	private Rigidbody2D rb;
@@ -46,7 +44,7 @@ public class EnemyBehaviour1 : MonoBehaviour
 		}
 		else
 		{
-			// // Calculate a random y value between -1 and 1 and set our enemy on its merry way but in a right-to-left direction by using a -ve value for the x
+			// Calculate a random y value between -1 and 1 and set our enemy on its merry way but in a right-to-left direction by using a -ve value for the x
 			yValue = Random.Range(-10, 11) / 10.0f;
 			rb.velocity = new Vector2(-1, yValue) * speed;
 		}
@@ -82,7 +80,6 @@ public class EnemyBehaviour1 : MonoBehaviour
 
 					dying = true;
 
-					//anim.SetBool("KillMe", true);
 					GameObject newExplosion = Instantiate(explosion, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
 					AudioSource noise = newExplosion.GetComponent<AudioSource>();
 					noise.Play();
@@ -113,16 +110,6 @@ public class EnemyBehaviour1 : MonoBehaviour
 			{
 				dying = true;
 
-				//	if we've been shot and we're in the respawn bubble then reduce the
-				//	count by 1 as we're just about to explode.....
-				// if (inTheRespawnBubble)
-				// {
-				// 	GameMaster.EnemiesInRespawnBubble--;
-				// 	Debug.Log("Bubble decrement");
-				// }
-
-
-				// anim.SetBool("KillMe", true);
 				GameObject newExplosion = Instantiate(explosion, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
 				AudioSource noise = newExplosion.GetComponent<AudioSource>();
 				noise.Play();
@@ -139,15 +126,6 @@ public class EnemyBehaviour1 : MonoBehaviour
 			{
 				dying = true;
 
-				//	if we've killed the player and we're in the respawn bubble then reduce the
-				//	count by 1 as we're just about to explode.....
-				// if (inTheRespawnBubble)
-				// {
-				// 	GameMaster.EnemiesInRespawnBubble--;
-				// 	Debug.Log("Player decrement");
-				// }
-
-				// anim.SetBool("KillMe", true);
 				GameObject newExplosion = Instantiate(explosion, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
 				AudioSource noise = newExplosion.GetComponent<AudioSource>();
 				noise.Play();
@@ -170,7 +148,6 @@ public class EnemyBehaviour1 : MonoBehaviour
 		{
 			inTheRespawnBubble = false;
 			GameMaster.EnemiesInRespawnBubble--;
-			// Debug.Log("Exit decrement");
 		}
 	}
 
