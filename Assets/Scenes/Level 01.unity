@@ -558,7 +558,7 @@ MonoBehaviour:
   - name: Straight Firey Balls
     enemy: {fileID: 3851745588846516958, guid: 66913ca15c73cac4caf145717da38597, type: 3}
     count: 4
-    rate: 5
+    rate: 10
   - name: Angled Firey Balls
     enemy: {fileID: 3851745588846516958, guid: 377b45b8ce45e9d45bf292e546b90626, type: 3}
     count: 3
@@ -4314,63 +4314,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1108465306, guid: 0691cb18c224dd04a84a5b19d9fc308d, type: 3}
   m_PrefabInstance: {fileID: 7960229508047862893}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1137511963
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3851745588846516958, guid: 66913ca15c73cac4caf145717da38597, type: 3}
-      propertyPath: m_RootOrder
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 3851745588846516958, guid: 66913ca15c73cac4caf145717da38597, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3851745588846516958, guid: 66913ca15c73cac4caf145717da38597, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.37
-      objectReference: {fileID: 0}
-    - target: {fileID: 3851745588846516958, guid: 66913ca15c73cac4caf145717da38597, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3851745588846516958, guid: 66913ca15c73cac4caf145717da38597, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3851745588846516958, guid: 66913ca15c73cac4caf145717da38597, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3851745588846516958, guid: 66913ca15c73cac4caf145717da38597, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3851745588846516958, guid: 66913ca15c73cac4caf145717da38597, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3851745588846516958, guid: 66913ca15c73cac4caf145717da38597, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3851745588846516958, guid: 66913ca15c73cac4caf145717da38597, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3851745588846516958, guid: 66913ca15c73cac4caf145717da38597, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6965354121084106858, guid: 66913ca15c73cac4caf145717da38597, type: 3}
-      propertyPath: m_Name
-      value: Enemy1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 66913ca15c73cac4caf145717da38597, type: 3}
 --- !u!1 &1180234379
 GameObject:
   m_ObjectHideFlags: 0
@@ -7123,28 +7066,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1773919538 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6965354121084106858, guid: 66913ca15c73cac4caf145717da38597, type: 3}
-  m_PrefabInstance: {fileID: 1137511963}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1773919546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1773919538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a72318be4b8daf849972b324dfe357e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spriteWidth: 0
-  buffer: 0
-  screenBounds: {x: 0, y: 0}
-  screenOrigo: {x: 0, y: 0}
-  replicaAlreadyCreated: 0
 --- !u!1 &1786387257
 GameObject:
   m_ObjectHideFlags: 0

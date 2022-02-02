@@ -135,6 +135,8 @@ public class GameMaster : MonoBehaviour
 		RemainingLives = 3;
 		player1Lives.text = _remainingLives.ToString();
 
+		_enemiesInRespawnBubble = 0;      //	just to make sure the player can spawn again without issue.
+
 		//  spawn the spaceman
 		SpawnSpaceman(0.1f);
 	}

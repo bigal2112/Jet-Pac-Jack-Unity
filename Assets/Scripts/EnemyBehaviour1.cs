@@ -16,7 +16,7 @@ public class EnemyBehaviour1 : MonoBehaviour
 
 	private Animator anim;
 	private Rigidbody2D rb;
-	private AudioSource noise;
+
 
 	private bool dying = false;
 	private float yValue;
@@ -30,11 +30,6 @@ public class EnemyBehaviour1 : MonoBehaviour
 		//	get the component we need
 		rb = GetComponent<Rigidbody2D>();
 		anim = GetComponent<Animator>();
-		GetComponent<SpriteRenderer>().color = GameMaster.GetRandomColor();
-
-		noise = GetComponent<AudioSource>();
-		if (noise == null)
-			Debug.Log("There is no AudioSource component attached to " + gameObject.name);
 
 		inTheRespawnBubble = false;
 
@@ -92,6 +87,7 @@ public class EnemyBehaviour1 : MonoBehaviour
 
 					//anim.SetBool("KillMe", true);
 					GameObject newExplosion = Instantiate(explosion, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+					AudioSource noise = newExplosion.GetComponent<AudioSource>();
 					noise.Play();
 					Destroy(gameObject);
 					Destroy(newExplosion, 1.0f);
@@ -131,6 +127,7 @@ public class EnemyBehaviour1 : MonoBehaviour
 
 				// anim.SetBool("KillMe", true);
 				GameObject newExplosion = Instantiate(explosion, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+				AudioSource noise = newExplosion.GetComponent<AudioSource>();
 				noise.Play();
 				Destroy(gameObject);
 				Destroy(newExplosion, 1.0f);
@@ -155,6 +152,7 @@ public class EnemyBehaviour1 : MonoBehaviour
 
 				// anim.SetBool("KillMe", true);
 				GameObject newExplosion = Instantiate(explosion, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+				AudioSource noise = newExplosion.GetComponent<AudioSource>();
 				noise.Play();
 				Destroy(gameObject);
 				Destroy(newExplosion, 1.0f);

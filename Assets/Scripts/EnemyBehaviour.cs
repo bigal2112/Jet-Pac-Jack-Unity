@@ -23,6 +23,8 @@ public class EnemyBehaviour : MonoBehaviour
 
 	private bool inTheRespawnBubble;
 
+	public GameObject explosion;
+
 	void Start()
 	{
 		// Debug.Log("X:" + (transform.position.x).ToString());
@@ -45,8 +47,6 @@ public class EnemyBehaviour : MonoBehaviour
 		noise = GetComponent<AudioSource>();
 		if (noise == null)
 			Debug.Log("There is no AudioSource component attached to " + gameObject.name);
-
-		Destroy(gameObject, 10.0f);
 
 		//	change the attack angle from degrees to radians so the Mathf.Sin() function works in the FixedUpdate() method.
 		attackAngleInRads = attackAngle / Mathf.Rad2Deg;
@@ -74,9 +74,11 @@ public class EnemyBehaviour : MonoBehaviour
 					if (inTheRespawnBubble) GameMaster.EnemiesInRespawnBubble--;
 
 					dying = true;
-					anim.SetBool("KillMe", true);
+					GameObject newExplosion = Instantiate(explosion, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+					AudioSource noise = newExplosion.GetComponent<AudioSource>();
 					noise.Play();
-					Destroy(gameObject, 1.0f);
+					Destroy(gameObject);
+					Destroy(newExplosion, 1.0f);
 
 					if (collider.CompareTag("Bullet"))
 						GameMaster.IncrementPlayer1Score(scoreValue);
@@ -113,9 +115,11 @@ public class EnemyBehaviour : MonoBehaviour
 
 				//  and kill me
 				dying = true;
-				anim.SetBool("KillMe", true);
+				GameObject newExplosion = Instantiate(explosion, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+				AudioSource noise = newExplosion.GetComponent<AudioSource>();
 				noise.Play();
-				Destroy(gameObject, 1.0f);
+				Destroy(gameObject);
+				Destroy(newExplosion, 1.0f);
 			}
 		}
 

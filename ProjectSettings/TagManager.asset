@@ -21,6 +21,7 @@ TagManager:
   - Ceiling
   - Bullet
   - Edge
+  - ReplicaEnemy
   layers:
   - Default
   - TransparentFX
