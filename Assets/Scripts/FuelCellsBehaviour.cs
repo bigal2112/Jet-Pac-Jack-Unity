@@ -99,7 +99,7 @@ public class FuelCellsBehaviour : MonoBehaviour
 		if (collider.tag == "Dropzone" && state == ObjectState.IN_TRANSIT)
 		{
 
-			// Debug.Log("DROP");
+			Debug.Log("DROP");
 
 			//  remove the fuel cell/gems from the Pplayer object
 			gameObject.transform.parent = null;

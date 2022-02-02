@@ -227,7 +227,7 @@ public class Player : MonoBehaviour
 
 
 		//  if we've been hit by an enemy
-		if (collider.CompareTag("Enemy"))
+		if (collider.CompareTag("Enemy") || collider.CompareTag("ReplicaEnemy"))
 		{
 			if (!playerIsDying)
 			{

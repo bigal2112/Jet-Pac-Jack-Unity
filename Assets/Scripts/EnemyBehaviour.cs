@@ -41,7 +41,6 @@ public class EnemyBehaviour : MonoBehaviour
 
 		rb = GetComponent<Rigidbody2D>();
 		anim = GetComponent<Animator>();
-		GetComponent<SpriteRenderer>().color = GameMaster.GetRandomColor();
 
 		noise = GetComponent<AudioSource>();
 		if (noise == null)

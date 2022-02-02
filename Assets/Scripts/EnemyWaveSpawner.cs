@@ -134,6 +134,7 @@ public class EnemyWaveSpawner : MonoBehaviour
 
 		//  we've got a free spawn point so spawn the enemy at it.
 		Transform theEnemy = Instantiate(_enemy, enemySpawnPoints[newPoint].position, Quaternion.identity);
+		theEnemy.GetComponent<SpriteRenderer>().color = GameMaster.GetRandomColor();      //	apply a random color here, do not move this to the objects Start()!!
 	}
 
 }       //  class
