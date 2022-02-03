@@ -559,41 +559,51 @@ MonoBehaviour:
     enemy: {fileID: 3851745588846516958, guid: 66913ca15c73cac4caf145717da38597, type: 3}
     count: 4
     rate: 10
+    leftSideOnly: 0
   - name: Angled Firey Balls
     enemy: {fileID: 3851745588846516958, guid: 377b45b8ce45e9d45bf292e546b90626, type: 3}
     count: 3
     rate: 10
+    leftSideOnly: 0
   - name: Bouncy Fuzzballs 45
     enemy: {fileID: 7112170060656837483, guid: ecce5b6b78052e44f8140a222a7fea57, type: 3}
     count: 6
     rate: 10
+    leftSideOnly: 0
   - name: Bouncy Fuzzyballs 30
     enemy: {fileID: 7112170060656837483, guid: 0a733196a4bea55458aa67a5c797977e, type: 3}
     count: 4
     rate: 20
+    leftSideOnly: 0
   - name: Bubbles
     enemy: {fileID: 6131930815443369608, guid: b0bd7aa40118d774a9896a3389767fa7, type: 3}
     count: 5
     rate: 10
+    leftSideOnly: 0
+  - name: Planes
+    enemy: {fileID: 5080446212841586676, guid: 35dd0b588053b2743bd294c96d4276c8, type: 3}
+    count: 3
+    rate: 20
+    leftSideOnly: 1
   nextWave: 0
   timeBetweenWaves: 5
   waveCountdown: 0
   state: 2
   enemySpawnPoints:
+  - {fileID: 1276435808}
+  - {fileID: 959032459}
+  - {fileID: 936575938}
+  - {fileID: 1297720061}
+  - {fileID: 962599458}
+  - {fileID: 1180234380}
+  - {fileID: 1668683772}
+  - {fileID: 1975627409}
+  - {fileID: 967336601}
   - {fileID: 153887866}
   - {fileID: 1944724543}
-  - {fileID: 1975627409}
-  - {fileID: 53548360}
-  - {fileID: 967336601}
-  - {fileID: 2146736}
   - {fileID: 15654157}
-  - {fileID: 962599458}
-  - {fileID: 1297720061}
-  - {fileID: 1276435808}
-  - {fileID: 1668683772}
-  - {fileID: 959032459}
-  - {fileID: 1180234380}
-  - {fileID: 936575938}
+  - {fileID: 53548360}
+  - {fileID: 2146736}
 --- !u!82 &142998744
 AudioSource:
   m_ObjectHideFlags: 0

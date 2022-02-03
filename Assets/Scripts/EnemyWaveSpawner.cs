@@ -15,6 +15,7 @@ public class EnemyWaveSpawner : MonoBehaviour
 		public Transform enemy;
 		public int count;
 		public float rate;
+		public bool leftSideOnly;
 	}
 
 	public Wave[] waves;
@@ -96,7 +97,7 @@ public class EnemyWaveSpawner : MonoBehaviour
 		for (int i = 0; i < _wave.count; i++)
 		{
 			//  spawn an enemy and wait before spawning the next one
-			SpawnEnemy(_wave.enemy);
+			SpawnEnemy(_wave);
 			yield return new WaitForSeconds(1f / _wave.rate);
 		}
 
@@ -116,7 +117,7 @@ public class EnemyWaveSpawner : MonoBehaviour
 	}
 
 
-	private void SpawnEnemy(Transform _enemy)
+	private void SpawnEnemy(Wave _wave)
 	{
 
 		int newPoint;
@@ -124,7 +125,15 @@ public class EnemyWaveSpawner : MonoBehaviour
 		//	while we're looking for a free spaw point
 		while (true)
 		{
-			newPoint = Random.Range(0, enemySpawnPoints.Length);
+			//	if we only want to spawn these enemies on the lefthad side of the screen then just use the first half of the spawn points.
+			//	there needs to be an even amount of spawn points arranged evenly between the left and right hand sides.
+			int spawnPointLimit;
+			if (_wave.leftSideOnly)
+				spawnPointLimit = (int)enemySpawnPoints.Length / 2;
+			else
+				spawnPointLimit = enemySpawnPoints.Length;
+
+			newPoint = Random.Range(0, spawnPointLimit);
 			if (spawnPointUsed[newPoint] == false)
 			{
 				spawnPointUsed[newPoint] = true;
@@ -133,7 +142,7 @@ public class EnemyWaveSpawner : MonoBehaviour
 		}
 
 		//  we've got a free spawn point so spawn the enemy at it.
-		Transform theEnemy = Instantiate(_enemy, enemySpawnPoints[newPoint].position, Quaternion.identity);
+		Transform theEnemy = Instantiate(_wave.enemy, enemySpawnPoints[newPoint].position, Quaternion.identity);
 		theEnemy.GetComponent<SpriteRenderer>().color = GameMaster.GetRandomColor();      //	apply a random color here, do not move this to the objects Start()!!
 	}
 

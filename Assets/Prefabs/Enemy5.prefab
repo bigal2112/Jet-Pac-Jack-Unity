@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 6131930815443369608}
   - component: {fileID: 6131930815443369609}
   - component: {fileID: 6131930815443369610}
-  - component: {fileID: 6131930815443369611}
   - component: {fileID: 963859502}
   - component: {fileID: 963859503}
   - component: {fileID: 963859501}
+  - component: {fileID: -4150038401309809713}
   m_Layer: 0
   m_Name: Enemy5
   m_TagString: Enemy
@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6131930815443369612}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.43, y: -1.34, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -109,28 +109,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6131930815443369611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6131930815443369612}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5f41fa2c893f54459216bd4a33f939c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 2
-  waitBeforeAttack: 0
-  mirrorImage: 0
-  groundContactAction: 1
-  scoreValue: 40
-  explosion: {fileID: 8023219112110762524, guid: ab22982e0cb59364aa7c51290d557c9c, type: 3}
-  timeBeforeDirectionChange: 0
-  directionChangeDelayLowerLimit: 1
-  directionChangeDelayUpperLimit: 5
-  currentYDirection: 0
 --- !u!50 &963859502
 Rigidbody2D:
   serializedVersion: 4
@@ -186,3 +164,25 @@ MonoBehaviour:
   screenOrigo: {x: 0, y: 0}
   replicaAlreadyCreated: 0
   goingLeft: 0
+--- !u!114 &-4150038401309809713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6131930815443369612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5f41fa2c893f54459216bd4a33f939c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  waitBeforeAttack: 3
+  mirrorImage: 0
+  groundContactAction: 1
+  scoreValue: 45
+  explosion: {fileID: 8023219112110762524, guid: ab22982e0cb59364aa7c51290d557c9c, type: 3}
+  timeBeforeDirectionChange: 0
+  directionChangeDelayLowerLimit: 0.5
+  directionChangeDelayUpperLimit: 2
+  currentYDirection: 0

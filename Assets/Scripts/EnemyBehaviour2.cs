@@ -140,7 +140,7 @@ public class EnemyBehaviour2 : MonoBehaviour
 					else
 						// 	if we've hit the left or righthand sides of a platform then
 						//	bounce of at 90 degrees to our incoming angle on the y axis
-						rb.velocity = new Vector2(rb.velocity.x * -1, rb.velocity.y); ;
+						rb.velocity = new Vector2(rb.velocity.x * -1, rb.velocity.y);
 
 					//	reset the direction change delay
 					UpdateDirectionChangeDelay();

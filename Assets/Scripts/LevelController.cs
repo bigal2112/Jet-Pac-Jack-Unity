@@ -99,11 +99,11 @@ public class LevelController : MonoBehaviour
 
 
 		readyForNextLevel = false;
-		currentLevelLoop = 3;
+		currentLevelLoop = 4;
 
 		//	set the enemy waves allowed for this level loop.
-		enemyWaveFrom = 4;
-		enemyWaveTo = 4;
+		enemyWaveFrom = 5;
+		enemyWaveTo = 5;
 
 		rocketLaunched = false;
 		newLoopStarted = true;
@@ -375,12 +375,16 @@ public class LevelController : MonoBehaviour
 
 		switch (currentLevelLoop)
 		{
-			case 2:
+			case 2:       //	fuzzies
 				enemyWaveFrom = 2;
 				enemyWaveTo = 3;
 				break;
-			case 3:
+			case 3:       //	balloons
 				enemyWaveFrom = 4;
+				enemyWaveTo = 4;
+				break;
+			case 4:       //	planes
+				enemyWaveFrom = 5;
 				enemyWaveTo = 5;
 				break;
 			default:

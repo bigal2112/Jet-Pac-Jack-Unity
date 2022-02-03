@@ -26,6 +26,9 @@ public class ScreenWrapper : MonoBehaviour
 		//  get the width of the sprite and set the buffer width. This will be used to help
 		//  the smoothness of the transition from side to side when the twin is created.
 		SpriteRenderer sRenderer = GetComponent<SpriteRenderer>();
+		if (sRenderer == null)
+			Debug.LogError("No SpriteRender in " + gameObject.name);
+
 		spriteWidth = sRenderer.sprite.bounds.size.x;                     //  gets the width of our element.
 		myColor = sRenderer.color;
 
