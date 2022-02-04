@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(ScreenWrapper))]
 public class EnemyBehaviour2 : MonoBehaviour
 {
 	public enum GroundContactAction { EXPLODE, BOUNCE }
@@ -48,12 +49,14 @@ public class EnemyBehaviour2 : MonoBehaviour
 			// Calculate a random y direction value between -1 and 1 and set our enemy on its merry way. This will give us a 45, 0 or 315 degree angle on the x axis.
 			currentYDirection = Random.Range(-1, 2);
 			rb.velocity = new Vector2(1, currentYDirection) * speed;
+			GetComponent<ScreenWrapper>().goingLeft = false;
 		}
 		else
 		{
 			// Calculate a random y direction between -1 and 1 and set our enemy on its merry way but in a right-to-left direction by using a -ve value for the x
 			currentYDirection = Random.Range(-1, 2);
 			rb.velocity = new Vector2(-1, currentYDirection) * speed;
+			GetComponent<ScreenWrapper>().goingLeft = true;
 		}
 
 		// freeze the rotation so we doesnt go spinning after a collision

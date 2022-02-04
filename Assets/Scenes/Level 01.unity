@@ -582,8 +582,8 @@ MonoBehaviour:
     leftSideOnly: 0
   - name: Planes
     enemy: {fileID: 5080446212841586676, guid: 35dd0b588053b2743bd294c96d4276c8, type: 3}
-    count: 3
-    rate: 20
+    count: 10
+    rate: 10
     leftSideOnly: 1
   nextWave: 0
   timeBetweenWaves: 5

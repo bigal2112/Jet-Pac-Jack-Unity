@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(ScreenWrapper))]
 public class EnemyBehaviour3 : MonoBehaviour
 {
 	public enum GroundContactAction { EXPLODE, BOUNCE }
@@ -15,7 +16,7 @@ public class EnemyBehaviour3 : MonoBehaviour
 
 
 	private bool dying = false;
-	private bool flying = false;
+	public bool flying = false;
 	private bool youDancing;
 
 	private bool inTheRespawnBubble;
@@ -25,12 +26,12 @@ public class EnemyBehaviour3 : MonoBehaviour
 	public float waitBeforeAttack;
 	public float attackCountdown;
 
-	public float currentX;
+	public bool flyingRight;
 	private GameObject target;               //  the player
 	public Vector2 direction;
 	public Vector2 force;
 
-
+	private ScreenWrapper scrWrap;
 
 	void Start()
 	{
@@ -38,30 +39,46 @@ public class EnemyBehaviour3 : MonoBehaviour
 		//	get the component we need
 		rb = GetComponent<Rigidbody2D>();
 
-		inTheRespawnBubble = false;
-
-		//  As all these enemies are spawned on the left had side of the screen, but can move both left and right, we need to randlomly birl a couple around
-		//  Well weight it more towards going right though.
-		int goingLeft = Random.Range(1, 11);
-
-		if (goingLeft > 7)
-		{
-			transform.rotation = Quaternion.Euler(0f, 180f, 0f);
-			currentX = -1;
-		}
-		else
-		{
-			currentX = 1;
-		}
-
 		// freeze the rotation so we doesnt go spinning after a collision
 		rb.freezeRotation = true;
 
-		//  finally move the enemy onto the screen
-		transform.position = new Vector3(transform.position.x + 1.2f, transform.position.y, 0);
+		inTheRespawnBubble = false;
 
-		//  pause before attacking
-		attackCountdown = waitBeforeAttack;
+
+		//	if we've been spawned on the left of the screen, regardless of whether we're flying left or right, we're in a waiting state before we can fly
+		//	howevber if we've spawned on the right of the screen then we're a left flyer that's wrapped and need to be in a flying state with no position change
+		if (transform.position.x < 0)
+		{
+
+			//  As all these enemies are originally spawned on the left had side of the screen, but can move both left and right, we need to randlomly birl a 
+			//	couple around.  Well weight it more towards going right though.
+			int goingLeft = Random.Range(1, 11);
+
+			if (goingLeft > 2)
+			{
+				transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+				flyingRight = false;
+				GetComponent<ScreenWrapper>().goingLeft = true;
+			}
+			else
+			{
+				flyingRight = true;
+			}
+
+
+
+			//  move the enemy onto the screen
+			transform.position = new Vector3(transform.position.x + 1.2f, transform.position.y, 0);
+
+			//  pause before attacking
+			attackCountdown = waitBeforeAttack;
+			flying = false;
+		}
+		else
+		{
+			//	we're flying
+			flying = true;
+		}
 
 
 	}
@@ -114,21 +131,55 @@ public class EnemyBehaviour3 : MonoBehaviour
 		//  if the player is in front of us then update our direction towards him
 		//  if the player if behind us then continue on our current path
 
-		if (currentX > 0)                                                                 //  we're moving right
+		if (flyingRight)                                                                  //  we're flying right
 		{
 			if (target.transform.position.x > transform.position.x)                         //	and the player is to the right of us
 			{
 				direction = (target.transform.position - transform.position).normalized;      //	find the shortest direction from us to the Player
 				force = direction * speed * Time.deltaTime;                                   //	and calculate the force to get us there
 
-				//	now we need to clamp the speed to a min of 4 on the x so we keep
-				//	flying in a horizontal direction and don't slow down and a max of 1.5/-1.5 on 
-				//	the y so we don't	flying vertically.
+				//	we need to clamp the x force to a max of 4 so we keep flying in 
+				//	a horizontal direction and don't slow down.
 				force.x = Mathf.Max(force.x, 4f);
-				if (force.y > 1.5) force.y = 1.5f;
-				if (force.y < -1.5) force.y = -1.5f;
 			}
 		}
+		else                                                                                //	we're flying left
+		{
+			//	when flying left we start on the righthand side then move left, off the 
+			//	screen, and back onto the screen on the righthand side. So to begin with
+			//	if our x pos is < -8.29 (0.01 more [to the right] of the the spawn point)
+			//	then just fly straight otherwise track the target
+			if (transform.position.x <= -8.29)
+			{                                                                                   //	we're still on the lefthand side of the screen
+				force = new Vector2(-4, 0);                                                       //	simply send us straight left at -4ms.
+																																													// Debug.Log("Setting force to (-4, 0)");
+			}
+			else
+			{
+				// Debug.Log("In here");
+				if (target.transform.position.x < transform.position.x)                         //	and the player is to the left of us
+				{
+					// Debug.Log("Target is to the left");
+					direction = (target.transform.position - transform.position).normalized;      //	find the shortest direction from us to the Player
+					force = direction * speed * Time.deltaTime;                                   //	and calculate the force to get us there
+																																												// Debug.Log("Setting force direction * speed * Time.deltaTime;");
+
+					//	we need to clamp the x force to a min of -4 so we keep flying in 
+					//	a horizontal direction and don't slow down.
+					force.x = Mathf.Min(force.x, -4f);
+				}
+			}
+
+			//	if we're got to the middle of the screen then untag us so we will get killed
+			//	when we reach the other side rather than get respawned and wrapped 
+			if (transform.position.x > -1 && transform.position.x < 1)
+				gameObject.tag = "Untagged";
+
+		}
+
+		//	we need to clamp the y force to a max of 1.5/-1.5 so we don't fly completely vertically.
+		if (force.y > 1.5) force.y = 1.5f;
+		if (force.y < -1.5) force.y = -1.5f;
 
 		//	we can now apply the force to our rigid body
 		rb.velocity = force;

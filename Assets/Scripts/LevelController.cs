@@ -62,7 +62,7 @@ public class LevelController : MonoBehaviour
 	private bool spawningCollectable;
 
 	private int currentLevelLoop;
-	private int maxLevelLoops = 3;
+	private int maxLevelLoops = 5;
 	private bool readyForNextLevel;
 	private bool newLoopStarted;
 
@@ -99,11 +99,11 @@ public class LevelController : MonoBehaviour
 
 
 		readyForNextLevel = false;
-		currentLevelLoop = 4;
+		currentLevelLoop = 1;
 
 		//	set the enemy waves allowed for this level loop.
-		enemyWaveFrom = 5;
-		enemyWaveTo = 5;
+		enemyWaveFrom = 0;
+		enemyWaveTo = 1;
 
 		rocketLaunched = false;
 		newLoopStarted = true;

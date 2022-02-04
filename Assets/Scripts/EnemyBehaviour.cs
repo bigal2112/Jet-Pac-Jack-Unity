@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(ScreenWrapper))]
 public class EnemyBehaviour : MonoBehaviour
 {
 	public enum GroundContactAction { EXPLODE, BOUNCE }
@@ -37,6 +38,12 @@ public class EnemyBehaviour : MonoBehaviour
 
 			direction = 1;
 			attackAngle += 90;
+
+			GetComponent<ScreenWrapper>().goingLeft = false;
+		}
+		else
+		{
+			GetComponent<ScreenWrapper>().goingLeft = true;
 		}
 
 		// Debug.Log("attackAngle:" + attackAngle);

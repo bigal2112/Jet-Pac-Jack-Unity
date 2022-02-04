@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+[RequireComponent(typeof(ScreenWrapper))]
 public class EnemyBehaviour1 : MonoBehaviour
 {
 
@@ -39,6 +39,7 @@ public class EnemyBehaviour1 : MonoBehaviour
 		{
 			if (!mirrorImage)
 				transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+			GetComponent<ScreenWrapper>().goingLeft = false;
 
 			// Calculate a random y value between -1 and 1 and set our enemy on its merry way. 
 			yValue = Random.Range(-10, 11) / 10.0f;
@@ -49,6 +50,7 @@ public class EnemyBehaviour1 : MonoBehaviour
 			// // Calculate a random y value between -1 and 1 and set our enemy on its merry way but in a right-to-left direction by using a -ve value for the x
 			yValue = Random.Range(-10, 11) / 10.0f;
 			rb.velocity = new Vector2(-1, yValue) * speed;
+			GetComponent<ScreenWrapper>().goingLeft = true;
 		}
 
 		// freeze the rotation so it doesnt go spinning after a collision
