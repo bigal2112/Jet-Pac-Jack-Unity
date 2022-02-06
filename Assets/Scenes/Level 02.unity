@@ -582,7 +582,7 @@ MonoBehaviour:
     leftSideOnly: 0
   - name: Planes
     enemy: {fileID: 5080446212841586676, guid: 35dd0b588053b2743bd294c96d4276c8, type: 3}
-    count: 5
+    count: 10
     rate: 10
     leftSideOnly: 1
   nextWave: 0
@@ -9306,6 +9306,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1628440953}
     m_Modifications:
+    - target: {fileID: 1646984453, guid: 7bd3337baf41066428094f7ac0775a9c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1084801022, guid: d9d10206ff84fa24f8f5332d1c8d5bac, type: 3}
+    - target: {fileID: 2099155215, guid: 7bd3337baf41066428094f7ac0775a9c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -342354583, guid: d9d10206ff84fa24f8f5332d1c8d5bac, type: 3}
     - target: {fileID: 1745882605073627863, guid: 7bd3337baf41066428094f7ac0775a9c, type: 3}
       propertyPath: m_Name
       value: SpaceshipMiddle
@@ -9363,6 +9371,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1628440953}
     m_Modifications:
+    - target: {fileID: 628579217, guid: adf2d399456512840ab32ef620104326, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 628579218, guid: adf2d399456512840ab32ef620104326, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2012776421, guid: d9d10206ff84fa24f8f5332d1c8d5bac, type: 3}
+    - target: {fileID: 1640886915, guid: adf2d399456512840ab32ef620104326, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 705859942, guid: d9d10206ff84fa24f8f5332d1c8d5bac, type: 3}
     - target: {fileID: 4087829414657442433, guid: adf2d399456512840ab32ef620104326, type: 3}
       propertyPath: m_Name
       value: SpaceshipBase
@@ -9420,6 +9440,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1628440953}
     m_Modifications:
+    - target: {fileID: 1108465307, guid: 0691cb18c224dd04a84a5b19d9fc308d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 462739371, guid: d9d10206ff84fa24f8f5332d1c8d5bac, type: 3}
+    - target: {fileID: 1259254065, guid: 0691cb18c224dd04a84a5b19d9fc308d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -880822864, guid: d9d10206ff84fa24f8f5332d1c8d5bac, type: 3}
     - target: {fileID: 1460647465125311766, guid: 0691cb18c224dd04a84a5b19d9fc308d, type: 3}
       propertyPath: m_RootOrder
       value: 0

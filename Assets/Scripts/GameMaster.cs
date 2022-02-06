@@ -251,4 +251,45 @@ public class GameMaster : MonoBehaviour
 		return noPlayersInScene;
 	}
 
+
+	public void CleanupLeftoverCollectables()
+	{
+
+		//  go through all the game object and if any of them are collectables destroy them
+		List<GameObject> rootObjects = new List<GameObject>();
+		Scene scene = SceneManager.GetActiveScene();
+		scene.GetRootGameObjects(rootObjects);
+
+		// iterate root objects and do something
+		for (int i = 0; i < rootObjects.Count; ++i)
+		{
+			GameObject gameObject = rootObjects[i];
+			if (gameObject.CompareTag("Collectable"))
+				Destroy(gameObject);
+		}
+
+
+	}
+
+
+	public void DestroyAllEnemies()
+	{
+
+		//  go through all the game object and if any of them are collectables destroy them
+		List<GameObject> rootObjects = new List<GameObject>();
+		Scene scene = SceneManager.GetActiveScene();
+		scene.GetRootGameObjects(rootObjects);
+
+		// iterate root objects and do something
+		for (int i = 0; i < rootObjects.Count; ++i)
+		{
+			GameObject gameObject = rootObjects[i];
+			if (gameObject.CompareTag("Enemy") || gameObject.CompareTag("ReplicaEnemy"))
+				Destroy(gameObject, Random.Range(0.1f, 0.8f));
+		}
+
+		_enemiesInRespawnBubble = 0;      //	just to make sure the player can spawn again without issue.
+
+	}
+
 }

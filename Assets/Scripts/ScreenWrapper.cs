@@ -82,14 +82,14 @@ public class ScreenWrapper : MonoBehaviour
 		//  if we are a ReplicaEnemy and it is fully inside the screen boudaries we can safely change it to an Enemy
 		if ((pos.x + (spriteWidth / 2) < screenBounds.x && pos.x - (spriteWidth / 2) > screenOrigo.x) && gameObject.CompareTag("ReplicaEnemy"))
 		{
-			Debug.Log("Changing tag to Enemy");
+			// Debug.Log("Changing tag to Enemy");
 			gameObject.tag = "Enemy";
 		}
 
 		// if we are fully outside the screen boudaries we can safely destroy ourselves
 		if ((pos.x - spriteWidth - buffer > screenBounds.x || pos.x + spriteWidth + buffer < screenOrigo.x) && !gameObject.CompareTag("ReplicaEnemy"))
 		{
-			Debug.Log("Killing myself");
+			// Debug.Log("Killing myself");
 			Destroy(gameObject);
 		}
 

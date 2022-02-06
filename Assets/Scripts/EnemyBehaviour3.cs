@@ -54,7 +54,7 @@ public class EnemyBehaviour3 : MonoBehaviour
 			//	couple around.  Well weight it more towards going right though.
 			int goingLeft = Random.Range(1, 11);
 
-			if (goingLeft > 2)
+			if (goingLeft > 7)
 			{
 				transform.rotation = Quaternion.Euler(0f, 180f, 0f);
 				flyingRight = false;

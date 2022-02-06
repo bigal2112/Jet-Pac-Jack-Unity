@@ -62,7 +62,7 @@ public class LevelController : MonoBehaviour
 	private bool spawningCollectable;
 
 	private int currentLevelLoop;
-	private int maxLevelLoops = 5;
+	private int maxLevelLoops = 4;
 	private bool readyForNextLevel;
 	private bool newLoopStarted;
 
@@ -110,7 +110,7 @@ public class LevelController : MonoBehaviour
 
 		//  initialise properties
 		FuelCellActive = false;
-		fuelCellsNeeded = 4;
+		fuelCellsNeeded = 6;
 		fuelCellsDropped = 0;
 
 		SpaceshipBuilt = false;
@@ -193,8 +193,12 @@ public class LevelController : MonoBehaviour
 			else
 			{
 
-				//	and clean up any leftover gems
-				CleanupLeftoverCollectables();
+				//	and clean up any leftover gems and reset the gems counter
+				GameMaster.gmInstance.CleanupLeftoverCollectables();
+				collectablesCounter = 0;
+
+				//	now start destroying any remaining enemies from this level
+				GameMaster.gmInstance.DestroyAllEnemies();
 
 				//  run spaceship landing animation
 				//  before we land the spaceship we need to make it all white again
@@ -211,7 +215,7 @@ public class LevelController : MonoBehaviour
 				StartCoroutine(ControlRocketBurn(false));
 
 				//  as the spaceship is landing we can start the countdown to spawn the spaceman
-				GameMaster.SpawnSpaceman(7.6f);
+				GameMaster.SpawnSpaceman(8.0f);
 
 				StartCoroutine(SetEnemiesForNextLoop());
 
@@ -222,6 +226,12 @@ public class LevelController : MonoBehaviour
 				_nextSpaceshipPart = null;
 
 			}
+		}
+
+		if (readyForNextLevel && currentLevelLoop > maxLevelLoops)
+		{
+			Debug.Log("LOAD THE NEXT SCENE HERE!!!");
+			Application.Quit();
 		}
 
 		readyForNextLevel = false;
@@ -395,26 +405,6 @@ public class LevelController : MonoBehaviour
 		//	enable the scrips so the enemies start spawning
 		enemyWaveSpawnerScript.enabled = true;
 
-	}
-
-
-	private void CleanupLeftoverCollectables()
-	{
-
-		//  go through all the game object and if any of them are collectables destroy them
-		List<GameObject> rootObjects = new List<GameObject>();
-		Scene scene = SceneManager.GetActiveScene();
-		scene.GetRootGameObjects(rootObjects);
-
-		// iterate root objects and do something
-		for (int i = 0; i < rootObjects.Count; ++i)
-		{
-			GameObject gameObject = rootObjects[i];
-			if (gameObject.tag == "Collectable")
-				Destroy(gameObject);
-		}
-
-		collectablesCounter = 0;
 	}
 
 }

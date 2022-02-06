@@ -75,7 +75,10 @@ public class FuelCellsBehaviour : MonoBehaviour
 			}
 			else
 			{
-				state = ObjectState.WAITING;
+				//	sometime the cell "thinks" it's hit the ground but is still actuall IN_TRANSIT and attached to the Player
+				//	so check here if the parent os null. If it is then it's proper on the ground and the state needs changing
+				if (gameObject.transform.parent == null)
+					state = ObjectState.WAITING;
 			}
 		}
 
@@ -106,9 +109,9 @@ public class FuelCellsBehaviour : MonoBehaviour
 		if (collider.tag == "Dropzone" && state == ObjectState.IN_TRANSIT)
 		{
 
-			Debug.Log("DROP");
+			// Debug.Log("DROP");
 
-			//  remove the fuel cell/gems from the Pplayer object
+			//  remove the fuel cell/gems from the Player object
 			gameObject.transform.parent = null;
 
 			//  give it some physics, make sure it's on the correct X value and rotation
