@@ -48,7 +48,6 @@ public class LevelController : MonoBehaviour
 
 	public Transform spaceship;
 	public GameObject liftOffEntrance;
-	// public GameObject spaceman;
 
 	private int fuelCellsNeeded;
 	private int fuelCellsDropped;
@@ -76,9 +75,23 @@ public class LevelController : MonoBehaviour
 
 	private void Awake()
 	{
-		//  if there is an instance of the LevelController
-		if (lvInstance == null)
+		//	---------------------------------------------------------------------------------------
+		//	Create a Singleton of the GameMaster class that will not be destroyed between scenes.
+		//	---------------------------------------------------------------------------------------
+
+		//  if there is an instance of the GameMaster
+		if (lvInstance != null)
+		{
+			//  and the instance is not this instance (the first instance) then destory it
+			if (lvInstance != this)
+				Destroy(this.gameObject);
+		}
+		else
+		//  if there is no instance then create one and set to the not be destroyed between scenes
+		{
 			lvInstance = this;
+			DontDestroyOnLoad(this);
+		}
 	}
 
 

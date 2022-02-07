@@ -585,6 +585,11 @@ MonoBehaviour:
     count: 5
     rate: 10
     leftSideOnly: 1
+  - name: Flying Saucers
+    enemy: {fileID: 8184906862144709493, guid: d6d9529d0a5b7a542a4ffd120b9a940c, type: 3}
+    count: 5
+    rate: 10
+    leftSideOnly: 0
   nextWave: 0
   timeBetweenWaves: 5
   waveCountdown: 0
