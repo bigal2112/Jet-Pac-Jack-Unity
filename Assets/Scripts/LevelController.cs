@@ -62,7 +62,7 @@ public class LevelController : MonoBehaviour
 	private bool spawningCollectable;
 
 	private int currentLevelLoop;
-	private int maxLevelLoops = 4;
+	private int maxLevelLoops = 5;
 	private bool readyForNextLevel;
 	private bool newLoopStarted;
 
@@ -99,11 +99,11 @@ public class LevelController : MonoBehaviour
 
 
 		readyForNextLevel = false;
-		currentLevelLoop = 1;
+		currentLevelLoop = 5;
 
 		//	set the enemy waves allowed for this level loop.
-		enemyWaveFrom = 0;
-		enemyWaveTo = 1;
+		enemyWaveFrom = 6;
+		enemyWaveTo = 6;
 
 		rocketLaunched = false;
 		newLoopStarted = true;
@@ -127,6 +127,7 @@ public class LevelController : MonoBehaviour
 		StartCoroutine(DropCollectable(newLoopStarted));
 		newLoopStarted = false;
 
+		//	make sure the Game Over UI is inactive.
 		GameMaster.gmInstance.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
 	}
 
@@ -230,8 +231,8 @@ public class LevelController : MonoBehaviour
 
 		if (readyForNextLevel && currentLevelLoop > maxLevelLoops)
 		{
-			Debug.Log("LOAD THE NEXT SCENE HERE!!!");
-			Application.Quit();
+			//	load the next level scene
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 		}
 
 		readyForNextLevel = false;
@@ -396,6 +397,10 @@ public class LevelController : MonoBehaviour
 			case 4:       //	planes
 				enemyWaveFrom = 5;
 				enemyWaveTo = 5;
+				break;
+			case 5:       //	flying saucers
+				enemyWaveFrom = 6;
+				enemyWaveTo = 6;
 				break;
 			default:
 				Debug.LogError("No currentLevelLoop value present");
