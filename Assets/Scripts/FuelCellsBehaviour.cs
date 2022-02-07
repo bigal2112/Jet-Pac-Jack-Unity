@@ -63,7 +63,7 @@ public class FuelCellsBehaviour : MonoBehaviour
 		//  if the cell has hit the ground then check whether it's X value is that of the drop zone
 		//  if it is then the cell has been loaded into the ship
 		//  if not the update the state so that it stops falling
-		if (collider.gameObject.tag == "Ground")
+		if (collider.gameObject.CompareTag("Ground"))
 		{
 			// Debug.Log("HIT THE GROUND");
 
@@ -86,7 +86,7 @@ public class FuelCellsBehaviour : MonoBehaviour
 		//  if the player has bumped into the cell when it was either in the air or on the ground
 		//  than attached the cell to the player so it is no in transit and will go whereever
 		//  the player goes.
-		if (collider.tag == "Player" && (state == ObjectState.WAITING || state == ObjectState.FALLING))
+		if (collider.CompareTag("Player") && (state == ObjectState.WAITING || state == ObjectState.FALLING))
 		{
 			// Debug.Log("Player collided");
 
@@ -106,10 +106,8 @@ public class FuelCellsBehaviour : MonoBehaviour
 
 		//  if the player has a cell in transit and passes through the drop zone then unhook the
 		//  cell from the player set the state of it to dropping.
-		if (collider.tag == "Dropzone" && state == ObjectState.IN_TRANSIT)
+		if (collider.CompareTag("Dropzone") && state == ObjectState.IN_TRANSIT)
 		{
-
-			// Debug.Log("DROP");
 
 			//  remove the fuel cell/gems from the Player object
 			gameObject.transform.parent = null;
@@ -118,10 +116,9 @@ public class FuelCellsBehaviour : MonoBehaviour
 			gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
 			gameObject.transform.position = new Vector3(dropzoneX, gameObject.transform.position.y, 0f);
 
-
 			state = ObjectState.DROPPING;
 
 		}
-
 	}
+
 }
